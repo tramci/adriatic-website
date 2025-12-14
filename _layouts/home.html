@@ -1,0 +1,146 @@
+---
+layout: default
+---
+{% assign featured_post = site.posts | where: "featured", true | first %}
+{% unless featured_post %}
+  {% assign featured_post = site.posts.first %}
+{% endunless %}
+
+{% if featured_post %}
+<!-- HERO SECTION (full width) -->
+<section class="hero-section">
+  <a href="{{ featured_post.url | relative_url }}" class="hero-link">
+    <div class="hero-grid" {% if featured_post.hero_color %}style="background-color: {{ featured_post.hero_color }};"{% endif %}>
+      <div class="hero-text">
+        <span class="category-tag {{ featured_post.category }}">
+          {% if featured_post.category_display %}{{ featured_post.category_display }}{% else %}{{ featured_post.category }}{% endif %}
+        </span>
+        <h1 class="hero-headline">{{ featured_post.title }}</h1>
+        {% if featured_post.excerpt %}
+          <p class="hero-summary">{{ featured_post.excerpt | strip_html | truncate: 220 }}</p>
+        {% endif %}
+        {% if featured_post.author %}
+          <div class="hero-author">By {{ featured_post.author }}</div>
+        {% endif %}
+      </div>
+      <div class="hero-image-wrapper">
+        {% if featured_post.image %}
+          <img src="{{ featured_post.image }}" alt="{{ featured_post.title }}" class="hero-image">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&h=562&fit=crop" alt="Featured article" class="hero-image">
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</section>
+{% endif %}
+
+<!-- Container for everything below hero -->
+<div class="container">
+
+<!-- FIRST TWO ARTICLES -->
+<section class="articles-section">
+  <div class="articles-grid">
+    {% assign recent_posts = site.posts | where_exp: "post", "post.url != featured_post.url" %}
+    {% for post in recent_posts limit: 2 %}
+      <article class="article-item">
+        <a href="{{ post.url | relative_url }}" class="article-link">
+          {% if post.image %}
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="article-thumbnail">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
+          {% endif %}
+          <div class="article-content">
+            <span class="category-tag {{ post.category }}">
+              {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+            </span>
+            <h3>{{ post.title }}</h3>
+            <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+            {% if post.author %}
+              <div class="article-author">{{ post.author }}</div>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- NEWSLETTER BANNER -->
+<section class="newsletter-section">
+  <div class="newsletter-container">
+    <div class="newsletter-image">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=600&fit=crop" alt="Newsletter">
+    </div>
+    <div class="newsletter-content">
+      <p class="newsletter-eyebrow">Our newsletter</p>
+      <a href="/subscribe" class="newsletter-title-link">
+        <h2 class="newsletter-title">A slower take on a fast world.</h2>
+      </a>
+      <p class="newsletter-description">Essays, weekenders, and dispatches from across the region. In your inbox every other Saturday.</p>
+      <a href="/subscribe" class="newsletter-link">Subscribe →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSWIRE SECTION -->
+<section class="newswire-section">
+  <div class="newswire-container">
+    <div class="newswire-header">
+      <div class="newswire-header-left">
+        <h2 class="newswire-title">What we're following at a glance</h2>
+        <p class="newswire-timestamp">Updated {{ site.data.newswire.updated }}</p>
+      </div>
+      
+      <div class="newswire-live-indicator">
+        <span class="live-dot-glow"></span>
+        <span class="live-text">Live</span>
+      </div>
+    </div>
+
+    <div class="newswire-content">
+      <ul class="newswire-list">
+        {% for item in site.data.newswire.items %}
+          <li class="newswire-item">
+            <strong class="newswire-topic">{{ item.topic }}:</strong>
+            <p class="newswire-description">{{ item.description }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+      
+      <div class="newswire-curator">
+        <p class="newswire-curator-label">Curated by</p>
+        <p class="newswire-curator-name">{{ site.data.newswire.curator }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REMAINING ARTICLES -->
+<section class="articles-section">
+  <div class="articles-grid">
+    {% for post in recent_posts offset: 2 limit: 4 %}
+      <article class="article-item">
+        <a href="{{ post.url | relative_url }}" class="article-link">
+          {% if post.image %}
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="article-thumbnail">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
+          {% endif %}
+          <div class="article-content">
+            <span class="category-tag {{ post.category }}">
+              {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+            </span>
+            <h3>{{ post.title }}</h3>
+            <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+            {% if post.author %}
+              <div class="article-author">{{ post.author }}</div>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+</div> <!-- Close container -->

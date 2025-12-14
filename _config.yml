@@ -1,0 +1,101 @@
+title: "The Adriatic"
+description: "An open-source initiative for tracking global news, conflict, and intelligence"
+url: "https://tramci.github.io"
+baseurl: "/azt"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+
+# Sass/CSS settings for performance
+sass:
+  style: compressed
+  sourcemap: never
+
+# Collections
+collections:
+  posts:
+    output: true
+
+# Default settings
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-seo-tag  # Add SEO optimization
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Categories
+categories: [business, power, culture, opinion]
+
+# Performance optimizations
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+
+# SEO settings (for jekyll-seo-tag)
+social:
+  name: The Adriatic
+  links:
+    - https://facebook.com/TheAdriatic
+    - https://instagram.com/TheAdriatic
+    - https://linkedin.com/company/the-adriatic
+
+# Twitter card settings
+twitter:
+  username: TheAdriatic
+  card: summary_large_image
+
+# Default image for social sharing
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /azt/assets/images/default-share.jpg  # Add a default share image
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
+  - .git
+  - .gitignore
+
+# Include certain files/folders
+include:
+  - _pages
+  - .htaccess
+
+# Build settings for GitHub Pages
+lsi: false
+safe: true
+incremental: false
+future: false
+unpublished: false
+
+# Timezone (adjust to your location)
+timezone: Europe/Ljubljana

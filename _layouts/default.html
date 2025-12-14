@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#bd2d2d" />
+  <meta name="base-url" content="{{ site.baseurl }}" />
+
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+
+  <!-- Critical CSS inline -->
+  <style>
+    {% include critical-css.html %}
+  </style>
+
+  <!-- Main CSS: async load with noscript fallback -->
+  <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css"></noscript>
+</head>
+<body>
+
+  <!-- MASTHEAD (scrolls away) -->
+  <header class="masthead">
+    <div class="masthead-container">
+      <div class="title-wrap">
+        <a href="{{ site.baseurl }}/" class="site-title">
+          <span class="title-line title-the">THE</span>
+          <span class="title-line title-adriatic">ADRIATIC</span>
+        </a>
+        <span class="site-blurb">
+          An independent journal of politics, economics, and culture. Since 2011.
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sentinel used to detect when nav becomes stuck -->
+  <div id="nav-sentinel" aria-hidden="true"></div>
+
+  <!-- STICKY NAV (stays visible) -->
+  <div class="sticky-nav">
+    <div class="masthead-container">
+      <nav>
+        <ul class="main-nav">
+          <li><a href="{{ site.baseurl }}/" {% if page.url == "/" %}class="active"{% endif %}>home</a></li>
+          <li><a href="{{ site.baseurl }}/about/" {% if page.url contains "/about" %}class="active"{% endif %}>about</a></li>
+          <li><a href="{{ site.baseurl }}/posts/" {% if page.url contains "/posts" %}class="active"{% endif %}>posts</a></li>
+          <li><a href="https://example.com/subscribe" rel="noopener noreferrer">subscribe</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+  {% if page.url == "/" %}
+    {{ content }}
+  {% else %}
+    <div class="container">
+      {{ content }}
+    </div>
+  {% endif %}
+</main>
+
+  <!-- FOOTER (three-column: left legal | center logo | right credo + socials) -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+
+      <!-- LEFT: legal + privacy line -->
+      <div class="footer-left">
+        <p class="footer-legal">
+          © 2025 The Adriatic, published by ISR. All rights reserved.<br>
+          Published with Jekyll. Hosted on GitHub Pages.
+        </p>
+        <p class="footer-privacy">
+          We don't use cookies. Your data stays yours.
+          Read our <a href="{{ site.baseurl }}/privacy/">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- CENTER: wordmark -->
+      <div class="footer-center">
+        <a href="{{ site.baseurl }}/" class="footer-logo" aria-label="{{ site.title }}">
+          <span class="footer-the">THE</span>
+          <span class="footer-adriatic">ADRIATIC</span>
+        </a>
+      </div>
+
+      <!-- RIGHT: credo + social icons -->
+      <div class="footer-right">
+        <p class="footer-credo">Follow the current, not the noise.</p>
+        <div class="footer-social">
+          <!-- Facebook -->
+          <a href="https://facebook.com/TheAdriatic" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4V9.5a3.4 3.4 0 0 1 3.6-3.8 15 15 0 0 1 2.1.2v2.4h-1.2c-1.2 0-1.5.6-1.5 1.4V12h2.7l-.4 3h-2.3v7A10 10 0 0 0 22 12Z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com/TheAdriatic" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.8-.9a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2z"/>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/company/the-adriatic" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-8.8 7.8H8V19h2.2v-8.2zM9.1 6.5a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM16 10.6c-1.1 0-1.9.6-2.2 1.2h-.1v-1h-2.2V19h2.3v-4.1c0-1.1.2-2.1 1.5-2.1s1.6 1.2 1.6 2.3V19H19v-4.5c0-2.2-1.2-3.9-3-3.9z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toggle full-width divider when nav is stuck -->
+  <script>
+    (function () {
+      const sentinel = document.getElementById('nav-sentinel');
+      const stickyNav = document.querySelector('.sticky-nav');
+      if (!sentinel || !stickyNav || !('IntersectionObserver' in window)) return;
+
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          stickyNav.classList.toggle('is-stuck', !entry.isIntersecting);
+        },
+        { root: null, threshold: 0 }
+      );
+
+      io.observe(sentinel);
+    })();
+  </script>
+  
+  <!-- Main JavaScript -->
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<!-- CENTERED ARTICLE CONTENT - Header First -->
+<article class="post-container">
+  <div class="post-header">
+    <div class="post-category">
+      <span class="category-tag {{ page.category }}">{{ page.category }}</span>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d %B %Y" }}</time>
+    {% if page.author %}
+      <div class="post-author-name">
+        <span class="by-text">By</span>
+        <span class="author-name">{{ page.author }}</span>{% if page.author_role %}, <span class="author-role">{{ page.author_role }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+  
+  <!-- FULL-WIDTH IMAGE AFTER HEADER -->
+  {% if page.image %}
+  <div class="post-hero-image">
+    <img src="{{ page.image }}" alt="{{ page.title }}">
+    {% if page.image_caption or page.image_credit %}
+      <div class="post-image-caption">
+        {% if page.image_caption %}{{ page.image_caption }}{% endif %}
+        {% if page.image_credit %}<span class="credit"> {{ page.image_credit }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  <!-- LEDE AFTER IMAGE -->
+  {% if page.excerpt %}
+  <div class="post-lede-wrapper">
+    <div class="post-lede">{{ page.excerpt | strip_html }}</div>
+  </div>
+  {% endif %}
+  
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

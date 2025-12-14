@@ -1,0 +1,169 @@
+/* ===============================================================
+   CRITICAL CSS - Above-the-fold only
+   =============================================================== */
+
+/* CSS Variables - needed immediately */
+:root {
+  /* Font sizes */
+  --z-ds-fontsize-14: 0.875rem;
+  --z-ds-fontsize-16: 1rem;
+
+  /* Spacing */
+  --z-ds-space-xxs: 0.5rem;
+  --z-ds-space-xs: 0.75rem;
+  --z-ds-space-s: 1rem;
+  --z-ds-space-m: 1.5rem;
+  --z-ds-space-l: 2rem;
+  --z-ds-space-xl: 3rem;
+
+  /* Colors */
+  --z-ds-color-text-100: #1a1a1a;
+  --z-ds-color-text-70: #000000;
+  --z-ds-color-background-0: #FAFAF8;
+  --z-ds-color-border: #e1e5e9;
+}
+
+/* Wordmark font - loads first */
+@font-face {
+  font-family: 'Adriatic Journal';
+  src: url('/azt/assets/fonts/Adriatic-Journal.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font: 400 var(--z-ds-fontsize-16)/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--z-ds-color-text-100);
+  background: var(--z-ds-color-background-0);
+}
+
+/* Masthead - above the fold */
+.masthead {
+  position: static;
+  background-color: #fefefe;
+  text-align: center;
+  padding: 0.75rem var(--z-ds-space-s) 0;
+}
+
+.masthead-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title-wrap {
+  text-align: center;
+  margin-bottom: var(--z-ds-space-s);
+}
+
+.site-title {
+  color: #bd2d2d;
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Adriatic Journal', Georgia, serif;
+  letter-spacing: 3px;
+}
+
+.title-the,
+.title-adriatic {
+  font-size: 3.25rem;
+  text-transform: uppercase;
+  display: block;
+  line-height: 1;
+}
+
+.title-the {
+  margin-bottom: -0.9rem;
+}
+
+.title-adriatic {
+  line-height: 1.1;
+}
+
+.site-blurb {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #000000;
+  font-size: 1rem;
+}
+
+/* Sentinel element */
+#nav-sentinel {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Sticky nav */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fefefe;
+  border-bottom: 4px solid #020018;
+  margin-bottom: none;
+  transition: all 0.3s ease;
+}
+
+.sticky-nav .masthead-container {
+  padding: 0.5rem 0;
+}
+
+.sticky-nav.is-stuck {
+  border-bottom: 3px solid #020018;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sticky-nav.is-stuck .masthead-container {
+  border-bottom: none;
+}
+
+/* Basic nav structure */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--z-ds-space-l);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--z-ds-color-text-70);
+  text-decoration: none;
+}
+
+/* Main content container */
+.main-content {
+  padding: 0 0 var(--z-ds-space-m);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}

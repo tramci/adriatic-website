@@ -1,0 +1,31 @@
+---
+layout: default
+title: "Posts"
+permalink: /posts/
+---
+
+<section class="posts-wrap">
+  <ul class="posts-list">
+    {%- comment -%}
+      Prefer paginator (if jekyll-paginate is configured), else fall back to site.posts.
+    {%- endcomment -%}
+    {% assign list = paginator.posts | default: site.posts %}
+    {% for post in list %}
+      <li class="posts-item">
+        <a class="posts-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="posts-date">{{ post.date | date: "%d / %m / %y" }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if paginator.total_pages > 1 %}
+    <nav class="pagination" style="margin-top: var(--z-ds-space-l); display:flex; justify-content:space-between;">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+      {% else %}<span></span>{% endif %}
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</section>
