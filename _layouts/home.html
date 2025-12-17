@@ -25,7 +25,7 @@ layout: default
       </div>
       <div class="hero-image-wrapper">
         {% if featured_post.image %}
-          <img src="{{ featured_post.image }}" alt="{{ featured_post.title }}" class="hero-image">
+          <img src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title }}" class="hero-image">
         {% else %}
           <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&h=562&fit=crop" alt="Featured article" class="hero-image">
         {% endif %}
@@ -46,7 +46,7 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-link">
           {% if post.image %}
-            <img src="{{ post.image }}" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
           {% else %}
             <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
           {% endif %}
@@ -123,7 +123,7 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-link">
           {% if post.image %}
-            <img src="{{ post.image }}" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
           {% else %}
             <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
           {% endif %}

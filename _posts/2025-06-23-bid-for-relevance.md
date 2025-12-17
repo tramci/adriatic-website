@@ -4,7 +4,7 @@ title: "A new face, an old dilemma"
 date: 2025-06-23
 category: Another start-up party
 author: "Andraž Tavčar"
-image: "https://tramci.github.io/azt/assets/images/messiah.jpg"
+image: "/assets/images/messiah.jpg"
 hero_color: "#a07f39ff"
 image_caption: "Description of the image"
 image_credit: "Photo by John Doe"

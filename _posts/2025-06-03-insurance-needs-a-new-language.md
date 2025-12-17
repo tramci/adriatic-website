@@ -4,7 +4,7 @@ title: "Insurance needs a new language that explains rather than entertains"
 date: 2025-06-04
 category: Infantilisation
 author: "Andraž Tavčar"
-image: "https://tramci.github.io/azt/assets/images/insurance-aint-all-that.png"  # optional
+image: "/assets/images/insurance-aint-all-that.png"
 excerpt: "In a world that increasingly trades complexity for convenience, Slovenia’s insurance leaders gathered last week to make a stark case: maturity still matters."
 ---
 
