@@ -9,10 +9,9 @@ layout: default
       <span class="category-tag {{ page.category }}">{{ page.category }}</span>
     </div>
     <h1 class="post-title">{{ page.title }}</h1>
-    <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d %B %Y" }}</time>
+    <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
     {% if page.author %}
       <div class="post-author-name">
-        <span class="by-text">By</span>
         <span class="author-name">{{ page.author }}</span>{% if page.author_role %}, <span class="author-role">{{ page.author_role }}</span>{% endif %}
       </div>
     {% endif %}
@@ -41,4 +40,39 @@ layout: default
   <div class="post-content">
     {{ content }}
   </div>
+
+  {% if site.data.current_issue %}
+  <aside class="current-issue-callout">
+    <p class="current-issue-heading">In Print</p>
+    <a href="{{ site.data.current_issue.link | relative_url }}" class="current-issue-image-link">
+      <img src="{{ site.data.current_issue.image | relative_url }}" alt="Current issue cover">
+    </a>
+    <a href="{{ site.data.current_issue.link | relative_url }}" class="current-issue-link"><span class="current-issue-link-text">{{ site.data.current_issue.title }}</span><span class="current-issue-dots"></span></a>
+  </aside>
+  <script>
+    window.addEventListener('load', function() {
+      const callout = document.querySelector('.current-issue-callout');
+      const content = document.querySelector('.post-content');
+      const container = document.querySelector('.post-container');
+      if (!callout || !content || !container) return;
+
+      const paragraphs = content.querySelectorAll('p');
+      if (paragraphs.length < 3) return;
+
+      const midIndex = Math.floor(paragraphs.length / 2);
+      const midParagraph = paragraphs[midIndex];
+
+      // Use offsetTop to get position relative to offset parent (the container)
+      // Walk up the offset chain to get total offset from container
+      let offset = 0;
+      let el = midParagraph;
+      while (el && el !== container) {
+        offset += el.offsetTop;
+        el = el.offsetParent;
+      }
+
+      callout.style.top = offset + 'px';
+    });
+  </script>
+  {% endif %}
 </article>

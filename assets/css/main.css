@@ -49,96 +49,6 @@
   font-display: swap;
 }
 
-/* Saj JY - Full family */
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-UltraThin.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-UltraThin.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-UltraThinItalic.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-UltraThinItalic.woff') format('woff');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-Light.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-LightItalic.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-LightItalic.woff') format('woff');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-Italic.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-Italic.woff') format('woff');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-Bold.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-BoldItalic.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-BoldItalic.woff') format('woff');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-ExtraBold.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-ExtraBold.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Saj JY';
-  src: url('/azt/assets/fonts/SajJY-ExtraBoldItalic.woff2') format('woff2'),
-       url('/azt/assets/fonts/SajJY-ExtraBoldItalic.woff') format('woff');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
 
 /* Maca Light */
 @font-face {
@@ -702,14 +612,27 @@ html {
   border-bottom: none;
 }
 
-.article-link {
+.article-item {
   display: grid;
   grid-template-columns: 420px 1fr;
   gap: var(--z-ds-space-m);
   width: 100%;
+  align-items: start;
+}
+
+.article-image-link {
+  display: block;
+}
+
+.article-title-link {
   color: inherit;
   text-decoration: none;
-  align-items: start;
+}
+
+.article-title-link:hover {
+  text-decoration: underline;
+  text-decoration-color: #bd2d2d;
+  text-underline-offset: 4px;
 }
 
 .article-thumbnail {
@@ -743,11 +666,6 @@ html {
   position: relative;
 }
 
-.article-link:hover h3 {
-  text-decoration: underline;
-  text-decoration-color: #bd2d2d;
-  text-underline-offset: 4px;
-}
 
 /* Article Grid Excerpts */
 .article-excerpt {
@@ -764,8 +682,7 @@ html {
   display: none !important;
 }
 
-.hero-link:hover,
-.article-link:hover {
+.hero-link:hover {
   cursor: pointer;
   background-color: transparent;
 }
@@ -947,47 +864,43 @@ html {
 }
 
 .newswire-timestamp {
-  font-family: 'Saj JY', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-16);
   font-style: normal;
   color: #A9A9A9;
   font-weight: 300;
-  margin: 0;
+  margin: -0.25rem 0 0 0;
 }
 
-/* Live indicator - blinking dot with glow */
-@keyframes blink-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
+/* Live indicator - typewriter status text */
 .newswire-live-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   margin: 20px;
 }
 
-.live-dot-glow {
-  width: 10px;
-  height: 10px;
-  background-color: #bd2d2d;
-  border-radius: 50%;
-  animation: blink-slow 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(189, 45, 45, 0.6);
-}
-
-.live-text {
-  font-family: 'Saj JY', Arial, sans-serif;
+.live-status-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 1px;
+  color: #666;
+}
+
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.live-cursor {
+  font-family: monospace;
+  font-size: 0.875rem;
   color: #bd2d2d;
-  text-transform: none;
+  animation: cursor-blink 1s step-end infinite;
+  margin-left: 1px;
 }
 
 .newswire-content {
@@ -1015,7 +928,7 @@ html {
 }
 
 .newswire-topic {
-  font-family: 'Saj JY', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-14);
   font-weight: 700;
   color: var(--z-ds-color-text-100);
@@ -1023,7 +936,7 @@ html {
 }
 
 .newswire-description {
-  font-family: 'Saj JY', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-14);
   font-weight: 400;
   color: var(--z-ds-color-text-100);
@@ -1039,7 +952,7 @@ html {
 }
 
 .newswire-curator-label {
-  font-family: 'Saj JY', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: var(--z-ds-fontsize-16);
@@ -1047,7 +960,7 @@ html {
 }
 
 .newswire-curator-name {
-  font-family: 'Saj JY', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-14);
   font-weight: 700;
   color: var(--z-ds-color-text-100);
@@ -1136,14 +1049,14 @@ html {
 /* Post Author */
 .post-author-name {
   font-family: 'Adriatic22', Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--z-ds-color-text-100);
   margin-bottom: 0;
 }
 
 .by-text,
 .author-name {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .author-role {
@@ -1169,6 +1082,7 @@ html {
 .post-image-caption {
   max-width: 750px;
   margin: var(--z-ds-space-s) auto 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--z-ds-color-text-70);
   font-size: var(--z-ds-fontsize-14);
   text-align: center;
@@ -1176,7 +1090,8 @@ html {
 }
 
 .post-image-caption .credit {
-  opacity: 0.8;
+  color: #A9A9A9;
+  opacity: 1;
 }
 
 /* Post Lede - After image, same width as body */
@@ -1200,8 +1115,9 @@ html {
 
 /* Post Body Content - Optimal reading width */
 .post-content {
+  position: relative;
   font-family: 'Adriatic22', 'Source Serif Pro', Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   line-height: 1.25;
   font-weight: 400;
   color: #111111;
@@ -1213,7 +1129,7 @@ html {
 .post-content h1,
 .post-content h2,
 .post-content h3 {
-  font-family: 'Saj JY', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--z-ds-color-text-100);
   margin: var(--z-ds-space-xl) 0 var(--z-ds-space-l);
   line-height: 1.3;
@@ -1249,11 +1165,25 @@ html {
 }
 
 .post-content blockquote {
-  border-left: 3px solid var(--z-ds-color-accent-100);
-  padding-left: var(--z-ds-space-l);
-  margin: var(--z-ds-space-l) 0;
-  color: var(--z-ds-color-text-70);
-  font-style: italic;
+  position: relative;
+  border: none;
+  padding-left: 3.5rem;
+  margin: var(--z-ds-space-xl) 0;
+  color: var(--z-ds-color-text-100);
+  font-style: normal;
+  font-size: 1.75rem;
+}
+
+.post-content blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.25rem;
+  font-family: 'Adriatic22', Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: #bd2d2d;
+  font-style: normal;
 }
 
 .post-content strong {
@@ -1272,6 +1202,75 @@ html {
 
 .post-content a:hover {
   text-decoration: underline;
+}
+
+/* =======================================================================
+   CURRENT ISSUE CALLOUT (In-article sidebar)
+   ======================================================================= */
+.post-container {
+  position: relative;
+}
+
+.current-issue-callout {
+  position: absolute;
+  left: calc(50% - 560px);
+  top: 200px;
+  width: 180px;
+  text-align: left;
+}
+
+.current-issue-heading {
+  font-family: 'Adriatic22', Georgia, serif;
+  font-size: 2.5rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #bd2d2d;
+  margin: 0 0 0.75rem 0;
+}
+
+.current-issue-image-link {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.current-issue-image-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.current-issue-link {
+  font-family: 'Adriatic22', Georgia, serif;
+  font-size: 1.5rem;
+  color: #111111;
+  text-decoration: none;
+}
+
+.current-issue-link:hover {
+  color: #bd2d2d;
+}
+
+.current-issue-link-text {
+}
+
+.current-issue-dots::after {
+  content: '';
+  animation: ellipsis 1.5s infinite;
+}
+
+@keyframes ellipsis {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: '...'; }
+}
+
+/* Hide on mobile - too narrow for float */
+@media (max-width: 48em) {
+  .current-issue-callout {
+    display: none;
+  }
 }
 
 /* =======================================================================
@@ -1466,21 +1465,17 @@ html {
     max-width: 100%;
     padding: 0 var(--z-ds-space-s);
   }
-  
+
   .articles-grid {
     gap: var(--z-ds-space-s);
     max-width: 100%;
   }
-  
+
   .article-item {
     display: block;
     padding-bottom: var(--z-ds-space-l);
   }
-  
-  .article-link {
-    display: block;
-  }
-  
+
   .article-thumbnail {
     width: 100%;
     height: 200px;
@@ -1525,12 +1520,12 @@ html {
     max-width: 800px;
     gap: var(--z-ds-space-l);
   }
-  
-  .article-link {
+
+  .article-item {
     grid-template-columns: 360px 1fr;
     gap: var(--z-ds-space-l);
   }
-  
+
   .article-thumbnail {
     height: 220px;
   }
@@ -1628,7 +1623,7 @@ html {
 }
 
 .category-title {
-  font-family: 'Saj JY', 'Inter', 'Helvetica Neue', Helvetica, Arial, FreeSans, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-34);
   font-weight: 700;
   color: var(--z-ds-color-text-100);
@@ -1674,7 +1669,7 @@ html {
 }
 
 .post-card-content h2 {
-  font-family: 'Saj JY', 'Inter', 'Helvetica Neue', Helvetica, Arial, FreeSans, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: var(--z-ds-fontsize-24);
   font-weight: 600;
   color: var(--z-ds-color-text-100);
@@ -1833,34 +1828,30 @@ html {
     gap: var(--z-ds-space-s);
     max-width: 100%;
   }
-  
+
   .article-item {
     display: block;
     padding-bottom: var(--z-ds-space-l);
   }
-  
-  .article-link {
-    display: block;
-  }
-  
+
   .article-thumbnail {
     width: 100%;
     height: 200px;
     margin-bottom: var(--z-ds-space-s);
   }
-  
+
   .article-content h3 {
     font-size: 1.125rem;
     line-height: 1.3;
     margin: var(--z-ds-space-xxxs) 0;
   }
-  
+
   .article-excerpt {
     font-size: 0.875rem;
     line-height: 1.5;
     margin: 0;
   }
-  
+
   /* Post layout responsive */
   .post-layout {
     grid-template-columns: 1fr;
@@ -2011,12 +2002,12 @@ html {
     max-width: 800px;
     gap: var(--z-ds-space-l);
   }
-  
-  .article-link {
+
+  .article-item {
     grid-template-columns: 360px 1fr;
     gap: var(--z-ds-space-l);
   }
-  
+
   .article-thumbnail {
     height: 220px;
   }

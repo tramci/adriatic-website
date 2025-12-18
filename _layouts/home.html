@@ -44,23 +44,23 @@ layout: default
     {% assign recent_posts = site.posts | where_exp: "post", "post.url != featured_post.url" %}
     {% for post in recent_posts limit: 2 %}
       <article class="article-item">
-        <a href="{{ post.url | relative_url }}" class="article-link">
+        <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
             <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
           {% else %}
             <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
           {% endif %}
-          <div class="article-content">
-            <span class="category-tag {{ post.category }}">
-              {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
-            </span>
-            <h3>{{ post.title }}</h3>
-            <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
-            {% if post.author %}
-              <div class="article-author">{{ post.author }}</div>
-            {% endif %}
-          </div>
         </a>
+        <div class="article-content">
+          <span class="category-tag {{ post.category }}">
+            {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+          </span>
+          <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
+          <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+          {% if post.author %}
+            <div class="article-author">{{ post.author }}</div>
+          {% endif %}
+        </div>
       </article>
     {% endfor %}
   </div>
@@ -93,9 +93,61 @@ layout: default
       </div>
       
       <div class="newswire-live-indicator">
-        <span class="live-dot-glow"></span>
-        <span class="live-text">Live</span>
+        <span class="live-status-text"></span><span class="live-cursor">█</span>
       </div>
+
+      <script>
+        (function() {
+          const activities = [
+            "Brewing coffee",
+            "Monitoring feeds",
+            "Fact-checking",
+            "On the phone",
+            "Watching Brussels",
+            "Filing copy",
+            "Swimming",
+            "Brainstorming",
+            "Vibing",
+            "Catching a lil' motion",
+            "Out for lunch",
+            "At the kiosk",
+            "On assignment",
+            "Meeting contacts"
+          ];
+
+          const statusEl = document.querySelector('.live-status-text');
+          let currentIndex = Math.floor(Math.random() * activities.length);
+          let charIndex = 0;
+          let currentText = '';
+          let isTyping = true;
+
+          function getNextActivity() {
+            currentText = activities[currentIndex] + '...';
+            currentIndex = (currentIndex + 1) % activities.length;
+            charIndex = 0;
+            isTyping = true;
+          }
+
+          function tick() {
+            if (isTyping) {
+              if (charIndex < currentText.length) {
+                statusEl.textContent = currentText.slice(0, charIndex + 1);
+                charIndex++;
+                setTimeout(tick, 50);
+              } else {
+                isTyping = false;
+                setTimeout(tick, 2000);
+              }
+            } else {
+              getNextActivity();
+              tick();
+            }
+          }
+
+          getNextActivity();
+          tick();
+        })();
+      </script>
     </div>
 
     <div class="newswire-content">
@@ -121,23 +173,23 @@ layout: default
   <div class="articles-grid">
     {% for post in recent_posts offset: 2 limit: 4 %}
       <article class="article-item">
-        <a href="{{ post.url | relative_url }}" class="article-link">
+        <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
             <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
           {% else %}
             <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
           {% endif %}
-          <div class="article-content">
-            <span class="category-tag {{ post.category }}">
-              {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
-            </span>
-            <h3>{{ post.title }}</h3>
-            <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
-            {% if post.author %}
-              <div class="article-author">{{ post.author }}</div>
-            {% endif %}
-          </div>
         </a>
+        <div class="article-content">
+          <span class="category-tag {{ post.category }}">
+            {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+          </span>
+          <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
+          <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+          {% if post.author %}
+            <div class="article-author">{{ post.author }}</div>
+          {% endif %}
+        </div>
       </article>
     {% endfor %}
   </div>

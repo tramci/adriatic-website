@@ -16,7 +16,7 @@ He described a public discourse that has become binary and performative. One tha
 
 The mood shifted decisively with the headline lecture by British criminologist Dr Keith Hayward, who painted a sobering picture of societal regression.
 
-> **“Just as fish rot from the head, so too does infantile politics begin at the top and spread through the body of democracy.”**
+> **Just as fish rot from the head, so too does infantile politics begin at the top and spread through the body of democracy.**
 
 In Hayward’s framing, Western societies are experiencing not merely a loss of maturity, but a collapse of adulthood as a cultural value. Leaders have become mirrors of their own narcissism. Institutions have surrendered to the logic of applause. In a world that idealises youth and disdains complexity, the very concept of maturity has become suspect.
 
@@ -30,7 +30,7 @@ A panel discussion on marketing explored the same question. Is simplification a 
 
 Simoniti turned the conversation to Slovenia’s own cultural inheritance. He described a society still shaped by its socialist past, with a deep-seated expectation that the state will absorb all risks.
 
-> **“We do not want freedom because freedom requires responsibility.”**
+> **We do not want freedom because freedom requires responsibility.**
 
 Education, in his view, no longer equips citizens to think critically. “Without expression there is no understanding. And without understanding there is no responsibility.”
 
