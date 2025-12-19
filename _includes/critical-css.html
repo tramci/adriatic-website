@@ -78,6 +78,15 @@ body {
   align-items: center;
   font-family: 'Adriatic Journal', Georgia, serif;
   letter-spacing: 3px;
+  transition: color 0.3s ease;
+}
+
+.title-wrap:hover .site-title {
+  color: #000000;
+}
+
+.title-wrap:hover .site-blurb {
+  color: #bd2d2d;
 }
 
 .title-the,
@@ -99,11 +108,12 @@ body {
 .site-blurb {
   display: block;
   margin-top: 0.25rem;
-  font-family: Georgia, serif;
+  font-family: 'Adriatic Journal', Georgia, serif;
   font-style: italic;
   font-weight: 400;
   color: #000000;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
 }
 
 /* Sentinel element */
@@ -152,10 +162,16 @@ body {
 .main-nav a {
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: 'Adriatic22', Georgia, serif;
   font-weight: 700;
   font-size: 0.9rem;
   color: var(--z-ds-color-text-70);
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #bd2d2d;
 }
 
 /* Main content container */
