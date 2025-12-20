@@ -14,6 +14,7 @@ excerpt: >-
   the country’s post-communist era.
 background_color: '#ebf0f4'
 accent_color: '#042c53'
+hero_color: '#b4c5d6'
 ---
 
 The Socialist Party (PS) remains the dominant force in Albania’s politics. Winning 52% of the vote and securing 82 seats in the 140-seat parliament, premier Edi Rama now enters his fourth consecutive term as prime minister – the longest-serving democratic leader since the fall of communism in the early 1990s.

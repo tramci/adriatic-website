@@ -12,6 +12,7 @@ excerpt: >-
   matters.
 background_color: '#edf5f4'
 accent_color: '#185a4e'
+hero_color: '#bdd9d4'
 ---
 
 The Slovenian insurance industry opened its flagship annual conference this week with an uncomfortable truth. Their sector is not and should not try to be fashionable. Nor, as Sergej Simoniti put it, should it be designed for Instagram.

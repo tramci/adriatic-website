@@ -70,12 +70,12 @@
   font-display: swap;
 }
 
-/* Lado Bold Condensed */
+/* Lado Light Condensed */
 @font-face {
   font-family: 'Lado';
-  src: url('/azt/assets/fonts/Lado-BoldCondensed.woff2') format('woff2'),
-       url('/azt/assets/fonts/Lado-BoldCondensed.woff') format('woff');
-  font-weight: 700;
+  src: url('/azt/assets/fonts/LadoCondensed-Light.woff2') format('woff2'),
+       url('/azt/assets/fonts/LadoCondensed-Light.woff') format('woff');
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
@@ -1136,24 +1136,28 @@ html {
 .post-author-sidebar .author-name {
   font-family: 'Lado', Georgia, serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 300;
   color: #111111;
   margin-bottom: 0.25rem;
 }
 
 .post-author-sidebar .author-role {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: 0.9rem;
+  font-family: 'Adriatic22', Georgia, serif;
+  font-size: 1.25rem;
   font-style: italic;
   color: #666666;
   margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #cccccc;
 }
 
 .post-author-sidebar .post-date {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: 0.9rem;
+  font-family: 'Adriatic22', Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
   color: #888888;
   display: block;
+  margin-top: 0.75rem;
 }
 
 /* Post Body Content - Optimal reading width */

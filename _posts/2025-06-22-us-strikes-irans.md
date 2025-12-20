@@ -13,6 +13,7 @@ excerpt: >-
   military action on Iranian soil since the 1979 revolution.
 background_color: '#f4f1f0'
 accent_color: '#4e3730'
+hero_color: '#d4cac7'
 ---
 
 The strikes, codenamed Operation Midnight Hammer, targeted the Fordow, Natanz and Isfahan facilities using an unprecedented deployment of seven B-2 stealth bombers flying from Missouri, supported by more than 125 aircraft. Pentagon officials said the bombers dropped 14 of the military's most powerful bunker-busting bombs, marking their first combat use.

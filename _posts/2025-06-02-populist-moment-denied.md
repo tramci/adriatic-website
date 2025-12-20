@@ -13,6 +13,7 @@ excerpt: >-
   mounting democratic pressure.
 background_color: '#f8edec'
 accent_color: '#74130e'
+hero_color: '#e4bbb9'
 ---
 
 Nicușor Dan’s victory marks a turning point in the fight against Trump-style nationalism across Eastern Europe. Romania’s presidential election on May 18 delivered a stunning reversal that echoed far beyond Bucharest. Centrist Nicușor Dan’s dramatic comeback victory over hard-right nationalist George Simion, winning 54% to 46% after trailing for weeks, represents perhaps the most significant pushback against Trump-inspired populism in Europe since 2016.

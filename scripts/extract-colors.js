@@ -27,6 +27,14 @@ function darkenColor(r, g, b, amount = 0.3) {
   return rgbToHex(newR, newG, newB);
 }
 
+// Create a bolder, more contrasting color for hero section (70% towards white)
+function heroColor(r, g, b, amount = 0.7) {
+  const newR = Math.round(r + (255 - r) * amount);
+  const newG = Math.round(g + (255 - g) * amount);
+  const newB = Math.round(b + (255 - b) * amount);
+  return rgbToHex(newR, newG, newB);
+}
+
 async function extractColors() {
   // Get all markdown files in _posts
   const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md'));
@@ -44,8 +52,8 @@ async function extractColors() {
       continue;
     }
 
-    // Skip if already has both colors
-    if (parsed.data.background_color && parsed.data.accent_color) {
+    // Skip if already has all colors
+    if (parsed.data.background_color && parsed.data.accent_color && parsed.data.hero_color) {
       console.log(`✓  ${file}: Already has colors`);
       continue;
     }
@@ -72,16 +80,19 @@ async function extractColors() {
       const backgroundColor = lightenColor(r, g, b, 0.92);
       // Create a darker accent for category tag
       const accentColor = darkenColor(r, g, b, 0.3);
+      // Create a bolder color for homepage hero (70% towards white)
+      const heroBackgroundColor = heroColor(r, g, b, 0.7);
 
       // Update front matter
       parsed.data.background_color = backgroundColor;
       parsed.data.accent_color = accentColor;
+      parsed.data.hero_color = heroBackgroundColor;
 
       // Write back to file
       const newContent = matter.stringify(parsed.content, parsed.data);
       fs.writeFileSync(filePath, newContent);
 
-      console.log(`✓  ${file}: bg ${backgroundColor}, accent ${accentColor}`);
+      console.log(`✓  ${file}: bg ${backgroundColor}, accent ${accentColor}, hero ${heroBackgroundColor}`);
     } catch (err) {
       console.log(`✗  ${file}: Error extracting color - ${err.message}`);
     }
