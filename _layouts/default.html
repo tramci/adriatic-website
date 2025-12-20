@@ -29,9 +29,27 @@
           <span class="title-line title-the">THE</span>
           <span class="title-line title-adriatic">ADRIATIC</span>
         </a>
-        <a href="{{ site.baseurl }}/" class="site-blurb">
-          Your corporate brief on geopolitics & living.
-        </a>
+      </div>
+      <div class="masthead-actions">
+        <a href="https://example.com/subscribe" class="subscribe-button" rel="noopener noreferrer">Subscribe</a>
+        <button class="search-button" aria-label="Search" id="search-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Search overlay -->
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+          <input type="text" class="search-input" id="search-input" placeholder="What are you curious about?" autocomplete="off">
+          <button class="search-close" id="search-close" aria-label="Close search">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="search-results" id="search-results"></div>
       </div>
     </div>
   </header>
@@ -46,10 +64,20 @@
         <ul class="main-nav">
           <li><a href="{{ site.baseurl }}/" {% if page.url == "/" %}class="active"{% endif %}>home</a></li>
           <li><a href="{{ site.baseurl }}/about/" {% if page.url contains "/about" %}class="active"{% endif %}>about</a></li>
-          <li><a href="{{ site.baseurl }}/posts/" {% if page.url contains "/posts" %}class="active"{% endif %}>posts</a></li>
-          <li><a href="https://example.com/subscribe" rel="noopener noreferrer">subscribe</a></li>
+          <li><a href="{{ site.baseurl }}/posts/" {% if page.url contains "/posts" %}class="active"{% endif %}>archive</a></li>
+          <li><a href="{{ site.baseurl }}/events/" {% if page.url contains "/events" %}class="active"{% endif %}>events</a></li>
         </ul>
       </nav>
+      <div class="sticky-nav-actions">
+        <div class="slot-wheel">
+          <a href="https://example.com/subscribe" class="subscribe-button" rel="noopener noreferrer">Subscribe</a>
+          <button class="search-button" aria-label="Search" id="sticky-search-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

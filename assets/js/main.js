@@ -117,26 +117,120 @@
   });
 
   // =================================================================
-  // SEARCH FUNCTIONALITY - Basic search with Enter key
+  // SEARCH FUNCTIONALITY - Overlay search with live results
   // =================================================================
-  
+
+  const searchToggle = document.getElementById('search-toggle');
+  const searchOverlay = document.getElementById('search-overlay');
   const searchInput = document.getElementById('search-input');
-  
+  const searchClose = document.getElementById('search-close');
+  const searchResults = document.getElementById('search-results');
+
+  let searchData = null;
+
+  // Load search data
+  async function loadSearchData() {
+    if (searchData) return searchData;
+
+    try {
+      const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
+      const response = await fetch(`${baseUrl}/search.json`);
+      searchData = await response.json();
+      return searchData;
+    } catch (error) {
+      console.error('Failed to load search data:', error);
+      return [];
+    }
+  }
+
+  // Perform search
+  function performSearch(query) {
+    if (!searchData || !query.trim()) {
+      searchResults.innerHTML = '';
+      return;
+    }
+
+    const lowerQuery = query.toLowerCase();
+    const results = searchData.filter(post => {
+      return post.title.toLowerCase().includes(lowerQuery) ||
+             post.excerpt.toLowerCase().includes(lowerQuery) ||
+             (post.author && post.author.toLowerCase().includes(lowerQuery)) ||
+             (post.category && post.category.toLowerCase().includes(lowerQuery));
+    });
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p class="search-no-results">No results found.</p>';
+      return;
+    }
+
+    searchResults.innerHTML = results.map(post => `
+      <div class="search-result-item">
+        <a href="${post.url}">
+          <div class="search-result-title">${post.title}</div>
+          <div class="search-result-excerpt">${post.excerpt}</div>
+        </a>
+      </div>
+    `).join('');
+  }
+
+  // Open search overlay
+  function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    loadSearchData();
+    setTimeout(() => searchInput?.focus(), 100);
+  }
+
+  // Close search overlay
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '';
+  }
+
+  // Event listeners for both search buttons (masthead and sticky nav)
+  if (searchToggle) {
+    searchToggle.addEventListener('click', openSearch);
+  }
+
+  const stickySearchToggle = document.getElementById('sticky-search-toggle');
+  if (stickySearchToggle) {
+    stickySearchToggle.addEventListener('click', openSearch);
+  }
+
+  if (searchClose) {
+    searchClose.addEventListener('click', closeSearch);
+  }
+
   if (searchInput) {
-    searchInput.addEventListener('keypress', function(e) {
-      // Trigger search on Enter key
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim();
-        
-        if (query) {
-          // Get base URL from meta tag or default to empty string
-          const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
-          
-          // Navigate to search page with query parameter
-          window.location.href = `${baseUrl}/search?q=${encodeURIComponent(query)}`;
-        }
+    searchInput.addEventListener('input', function(e) {
+      performSearch(e.target.value);
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSearch();
       }
     });
   }
+
+  // Close on overlay background click
+  if (searchOverlay) {
+    searchOverlay.addEventListener('click', function(e) {
+      if (e.target === searchOverlay) {
+        closeSearch();
+      }
+    });
+  }
+
+  // Close on Escape key (global)
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && searchOverlay?.classList.contains('active')) {
+      closeSearch();
+    }
+  });
 
 })();
