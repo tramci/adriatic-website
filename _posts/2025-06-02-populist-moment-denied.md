@@ -1,11 +1,17 @@
 ---
 layout: post
-title: "Populist moment denied"
-date: 2025-06-04
-category_display: "Trump rebuked"
-author: "Maja Dragović"
-image: "/assets/images/populist-moment-denied.png"
-excerpt: "Nicușor Dan’s surprise win over far-right firebrand George Simion in Romania’s presidential runoff marks a high-turnout rejection of “Romania First” populism — and signals a broader regional pushback as the EU’s eastern flank faces mounting democratic pressure."
+title: Populist moment denied
+date: 2025-06-04T00:00:00.000Z
+category_display: Trump rebuked
+author: Maja Dragović
+image: /assets/images/populist-moment-denied.png
+excerpt: >-
+  Nicușor Dan’s surprise win over far-right firebrand George Simion in Romania’s
+  presidential runoff marks a high-turnout rejection of “Romania First” populism
+  — and signals a broader regional pushback as the EU’s eastern flank faces
+  mounting democratic pressure.
+background_color: '#f8edec'
+accent_color: '#74130e'
 ---
 
 Nicușor Dan’s victory marks a turning point in the fight against Trump-style nationalism across Eastern Europe. Romania’s presidential election on May 18 delivered a stunning reversal that echoed far beyond Bucharest. Centrist Nicușor Dan’s dramatic comeback victory over hard-right nationalist George Simion, winning 54% to 46% after trailing for weeks, represents perhaps the most significant pushback against Trump-inspired populism in Europe since 2016.

@@ -1,12 +1,17 @@
 ---
 layout: post
-title: "US strikes Iran's nuclear facilities"
-date: 2025-06-22
+title: US strikes Iran's nuclear facilities
+date: 2025-06-22T00:00:00.000Z
 category: Crisis in Persia
-author: "Andraž Tavčar"
-author_role: "Researcher"
-image: "/assets/images/trump-situation.jpg"
-excerpt: "The United States launched devastating airstrikes against three of Iran's most sensitive nuclear sites on Sunday, marking the most significant American military action on Iranian soil since the 1979 revolution."
+author: Andraž Tavčar
+author_role: Researcher
+image: /assets/images/trump-situation.jpg
+excerpt: >-
+  The United States launched devastating airstrikes against three of Iran's most
+  sensitive nuclear sites on Sunday, marking the most significant American
+  military action on Iranian soil since the 1979 revolution.
+background_color: '#f4f1f0'
+accent_color: '#4e3730'
 ---
 
 The strikes, codenamed Operation Midnight Hammer, targeted the Fordow, Natanz and Isfahan facilities using an unprecedented deployment of seven B-2 stealth bombers flying from Missouri, supported by more than 125 aircraft. Pentagon officials said the bombers dropped 14 of the military's most powerful bunker-busting bombs, marking their first combat use.

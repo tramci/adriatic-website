@@ -2,6 +2,34 @@
 layout: default
 ---
 
+{% if page.background_color %}
+<style>
+  body {
+    background-color: {{ page.background_color }};
+  }
+  #nav-sentinel {
+    height: 0;
+  }
+  .title-wrap {
+    margin-bottom: 0;
+    padding-bottom: var(--z-ds-space-s);
+  }
+  {% if page.accent_color %}
+  .post-category .category-tag {
+    color: {{ page.accent_color }};
+  }
+  .current-issue-heading {
+    color: {{ page.accent_color }};
+  }
+  .current-issue-link {
+    border-bottom: 3px solid {{ page.accent_color }};
+    padding-bottom: 2px;
+    font-size: 1.25rem;
+  }
+  {% endif %}
+</style>
+{% endif %}
+
 <!-- CENTERED ARTICLE CONTENT - Header First -->
 <article class="post-container">
   <div class="post-header">
@@ -47,7 +75,7 @@ layout: default
     <a href="{{ site.data.current_issue.link | relative_url }}" class="current-issue-image-link">
       <img src="{{ site.data.current_issue.image | relative_url }}" alt="Current issue cover">
     </a>
-    <a href="{{ site.data.current_issue.link | relative_url }}" class="current-issue-link"><span class="current-issue-link-text">{{ site.data.current_issue.title }}</span><span class="current-issue-dots"></span></a>
+    <a href="{{ site.data.current_issue.link | relative_url }}" class="current-issue-link">{{ site.data.current_issue.title }}</a>
   </aside>
   <script>
     window.addEventListener('load', function() {

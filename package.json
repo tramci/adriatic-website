@@ -1,0 +1,12 @@
+{
+  "name": "adriatic-website",
+  "version": "1.0.0",
+  "description": "The Adriatic website build tools",
+  "scripts": {
+    "extract-colors": "node scripts/extract-colors.js"
+  },
+  "dependencies": {
+    "colorthief": "^2.4.0",
+    "gray-matter": "^4.0.3"
+  }
+}
