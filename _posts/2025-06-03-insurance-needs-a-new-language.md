@@ -4,6 +4,7 @@ title: Insurance needs a new language that explains rather than entertains
 date: 2025-06-04T00:00:00.000Z
 category: Infantilisation
 author: Andraž Tavčar
+author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/insurance-aint-all-that.png
 excerpt: >-
   In a world that increasingly trades complexity for convenience, Slovenia’s

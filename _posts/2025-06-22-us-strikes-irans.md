@@ -5,6 +5,7 @@ date: 2025-06-22T00:00:00.000Z
 category: Crisis in Persia
 author: Andraž Tavčar
 author_role: Researcher
+author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/trump-situation.jpg
 excerpt: >-
   The United States launched devastating airstrikes against three of Iran's most

@@ -37,14 +37,11 @@ layout: default
       <span class="category-tag {{ page.category }}">{{ page.category }}</span>
     </div>
     <h1 class="post-title">{{ page.title }}</h1>
-    <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
-    {% if page.author %}
-      <div class="post-author-name">
-        <span class="author-name">{{ page.author }}</span>{% if page.author_role %}, <span class="author-role">{{ page.author_role }}</span>{% endif %}
-      </div>
+    {% if page.excerpt %}
+    <div class="post-lede">{{ page.excerpt | strip_html }}</div>
     {% endif %}
   </div>
-  
+
   <!-- FULL-WIDTH IMAGE AFTER HEADER -->
   {% if page.image %}
   <div class="post-hero-image">
@@ -57,16 +54,25 @@ layout: default
     {% endif %}
   </div>
   {% endif %}
-  
-  <!-- LEDE AFTER IMAGE -->
-  {% if page.excerpt %}
-  <div class="post-lede-wrapper">
-    <div class="post-lede">{{ page.excerpt | strip_html }}</div>
-  </div>
-  {% endif %}
-  
-  <div class="post-content">
-    {{ content }}
+
+  <!-- Author sidebar + Content wrapper -->
+  <div class="post-body-wrapper">
+    {% if page.author %}
+    <aside class="post-author-sidebar">
+      {% if page.author_image %}
+      <img src="{{ page.author_image | relative_url }}" alt="{{ page.author }}" class="author-photo">
+      {% endif %}
+      <div class="author-name">{{ page.author }}</div>
+      {% if page.author_role %}
+      <div class="author-role">{{ page.author_role }}</div>
+      {% endif %}
+      <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
+    </aside>
+    {% endif %}
+
+    <div class="post-content">
+      {{ content }}
+    </div>
   </div>
 
   {% if site.data.current_issue %}

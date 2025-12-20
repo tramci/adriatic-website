@@ -4,6 +4,7 @@ title: Populist moment denied
 date: 2025-06-04T00:00:00.000Z
 category_display: Trump rebuked
 author: Maja Dragović
+author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/populist-moment-denied.png
 excerpt: >-
   Nicușor Dan’s surprise win over far-right firebrand George Simion in Romania’s
