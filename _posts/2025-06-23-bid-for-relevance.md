@@ -6,15 +6,12 @@ category: Another start-up party
 author: Andraž Tavčar
 author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/messiah.jpg
-hero_color: '#a07f39ff'
 image_caption: Description of the image.
 image_credit: Photo by John Doe
 excerpt: >-
-  In Slovenia’s increasingly atomised political landscape, Vladimir Prebilič’s
+  In Slovenia's increasingly atomised political landscape, Vladimir Prebilič's
   decision to launch a new party ahead of the 2026 parliamentary elections may
   appear a bold personal gamble.
-background_color: '#faf7f2'
-accent_color: '#87693f'
 ---
 But behind the move lies a deeper narrative: one of strategic disaffection with a political class he describes as paralysed by caution and bereft of vision.
 

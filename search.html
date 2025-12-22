@@ -1,0 +1,64 @@
+---
+layout: default
+title: Search
+---
+
+<div class="search-page">
+  <h1 class="search-page-title">Search Results</h1>
+  <p class="search-page-query" id="search-query-display"></p>
+
+  <div class="search-results-list" id="search-results-list">
+    <p class="search-loading">Searching...</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get('q') || '';
+  const queryDisplay = document.getElementById('search-query-display');
+  const resultsList = document.getElementById('search-results-list');
+
+  if (!query.trim()) {
+    queryDisplay.textContent = '';
+    resultsList.innerHTML = '<p class="search-no-query">Enter a search term to find articles.</p>';
+    return;
+  }
+
+  queryDisplay.textContent = `Results for "${query}"`;
+
+  // Load search data and perform search
+  const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
+
+  fetch(`${baseUrl}/search.json`)
+    .then(response => response.json())
+    .then(searchData => {
+      const lowerQuery = query.toLowerCase();
+      const results = searchData.filter(post => {
+        return post.title.toLowerCase().includes(lowerQuery) ||
+               post.excerpt.toLowerCase().includes(lowerQuery) ||
+               (post.author && post.author.toLowerCase().includes(lowerQuery)) ||
+               (post.category && post.category.toLowerCase().includes(lowerQuery));
+      });
+
+      if (results.length === 0) {
+        resultsList.innerHTML = '<p class="search-no-results">No results found.</p>';
+        return;
+      }
+
+      resultsList.innerHTML = results.map(post => `
+        <article class="search-result-item">
+          <a href="${post.url}">
+            <h2 class="search-result-title">${post.title}</h2>
+            <p class="search-result-excerpt">${post.excerpt}</p>
+            ${post.author ? `<span class="search-result-author">By ${post.author}</span>` : ''}
+          </a>
+        </article>
+      `).join('');
+    })
+    .catch(error => {
+      console.error('Search failed:', error);
+      resultsList.innerHTML = '<p class="search-error">Search failed. Please try again.</p>';
+    });
+})();
+</script>

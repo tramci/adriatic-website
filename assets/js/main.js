@@ -5,7 +5,7 @@
 
 (function() {
   'use strict';
-  
+
   // =================================================================
   // THEME TOGGLE - Segmented control for theme switching
   // =================================================================
@@ -45,192 +45,330 @@
   }
 
   // =================================================================
-  // SIDE PANEL MENU - Mobile/responsive navigation
+  // HAMBURGER MENU - Full-screen overlay navigation
   // =================================================================
-  
-  const menuToggle = document.getElementById('menu-toggle');
-  const sidePanel = document.getElementById('side-panel');
-  const overlay = document.getElementById('overlay');
-  const backArrow = document.getElementById('back-arrow');
+
+  const hamburgerToggle = document.getElementById('hamburger-toggle');
+  const menuOverlay = document.getElementById('menu-overlay');
+  const menuClose = document.getElementById('menu-close');
   const body = document.body;
 
   /**
-   * Opens the side panel menu
+   * Opens the hamburger menu overlay
    */
-  function openMenu() {
-    if (!sidePanel || !overlay) return;
-    
-    sidePanel.classList.add('open');
-    overlay.classList.add('show');
+  function openHamburgerMenu() {
+    if (!menuOverlay) return;
+
+    menuOverlay.classList.add('active');
     body.classList.add('menu-open');
   }
 
   /**
-   * Closes the side panel menu and clears search
+   * Closes the hamburger menu overlay
    */
-  function closeMenu() {
-    if (!sidePanel || !overlay) return;
-    
-    sidePanel.classList.remove('open');
-    overlay.classList.remove('show');
+  function closeHamburgerMenu() {
+    if (!menuOverlay) return;
+
+    menuOverlay.classList.remove('active');
     body.classList.remove('menu-open');
-    
-    // Clear search input when closing
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      searchInput.value = '';
-    }
   }
 
-  // Toggle menu on button click
-  if (menuToggle) {
-    menuToggle.addEventListener('click', function() {
-      if (sidePanel && sidePanel.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
+  // Open menu on hamburger click
+  if (hamburgerToggle) {
+    hamburgerToggle.addEventListener('click', openHamburgerMenu);
   }
 
-  // Close menu when clicking overlay
-  if (overlay) {
-    overlay.addEventListener('click', closeMenu);
-  }
-
-  // Close menu when clicking back arrow
-  if (backArrow) {
-    backArrow.addEventListener('click', closeMenu);
+  // Close menu on X click
+  if (menuClose) {
+    menuClose.addEventListener('click', closeHamburgerMenu);
   }
 
   // Close menu on Escape key
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && sidePanel && sidePanel.classList.contains('open')) {
-      closeMenu();
+    if (e.key === 'Escape' && menuOverlay && menuOverlay.classList.contains('active')) {
+      closeHamburgerMenu();
     }
   });
 
   // Close menu when clicking navigation links
-  const panelNavLinks = document.querySelectorAll('.panel-nav a');
-  panelNavLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
+  const menuLinks = document.querySelectorAll('.menu-link, .menu-featured-article');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', closeHamburgerMenu);
   });
 
   // =================================================================
-  // SEARCH FUNCTIONALITY - Overlay search with live results
+  // MASTHEAD SCROLL ANIMATION - Hero slides up to cover masthead
   // =================================================================
 
-  const searchToggle = document.getElementById('search-toggle');
-  const searchOverlay = document.getElementById('search-overlay');
-  const searchInput = document.getElementById('search-input');
-  const searchClose = document.getElementById('search-close');
-  const searchResults = document.getElementById('search-results');
+  const masthead = document.querySelector('.masthead');
+  const topNav = document.querySelector('.top-nav');
+  const mainContent = document.querySelector('.main-content');
+  const navBranding = document.querySelector('.nav-issue-scrolling');
 
-  let searchData = null;
+  // Article nav elements
+  const articleNav = document.getElementById('article-nav');
+  const articleProgressFill = document.getElementById('article-progress-fill');
+  const postContent = document.querySelector('.post-content');
+  const postContainer = document.querySelector('.post-container');
 
-  // Load search data
-  async function loadSearchData() {
-    if (searchData) return searchData;
+  if (masthead && topNav && mainContent) {
+    // Only apply on homepage
+    const isHomepage = window.location.pathname === '/' ||
+                       window.location.pathname === '/azt/' ||
+                       window.location.pathname.endsWith('/azt/');
 
-    try {
-      const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
-      const response = await fetch(`${baseUrl}/search.json`);
-      searchData = await response.json();
-      return searchData;
-    } catch (error) {
-      console.error('Failed to load search data:', error);
-      return [];
-    }
-  }
+    // Check if this is an article page (has post content)
+    const isArticlePage = !!postContent;
 
-  // Perform search
-  function performSearch(query) {
-    if (!searchData || !query.trim()) {
-      searchResults.innerHTML = '';
-      return;
-    }
+    if (!isHomepage) {
+      // Hide masthead on all inner pages
+      masthead.style.display = 'none';
+      mainContent.classList.add('has-shadow');
 
-    const lowerQuery = query.toLowerCase();
-    const results = searchData.filter(post => {
-      return post.title.toLowerCase().includes(lowerQuery) ||
-             post.excerpt.toLowerCase().includes(lowerQuery) ||
-             (post.author && post.author.toLowerCase().includes(lowerQuery)) ||
-             (post.category && post.category.toLowerCase().includes(lowerQuery));
-    });
+      if (isArticlePage && articleNav) {
+        // Article pages: start with default nav (scrolled), switch to article nav on scroll
+        let articleNavShown = false;
+        let navSwitchCooldown = false;
+        const NAV_SWITCH_DELAY = 800; // ms delay between switches
 
-    if (results.length === 0) {
-      searchResults.innerHTML = '<p class="search-no-results">No results found.</p>';
-      return;
-    }
+        topNav.classList.add('scrolled');
+        topNav.classList.add('article-mode');
+        body.classList.add('article-page');
 
-    searchResults.innerHTML = results.map(post => `
-      <div class="search-result-item">
-        <a href="${post.url}">
-          <div class="search-result-title">${post.title}</div>
-          <div class="search-result-excerpt">${post.excerpt}</div>
-        </a>
-      </div>
-    `).join('');
-  }
+        // Setup share button and progress bar
+        setupShareButton();
+        setupProgressBar();
 
-  // Open search overlay
-  function openSearch() {
-    if (!searchOverlay) return;
-    searchOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    loadSearchData();
-    setTimeout(() => searchInput?.focus(), 100);
-  }
+        function showArticleNav() {
+          if (articleNavShown || navSwitchCooldown) return;
+          articleNavShown = true;
+          navSwitchCooldown = true;
 
-  // Close search overlay
-  function closeSearch() {
-    if (!searchOverlay) return;
-    searchOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-    if (searchInput) searchInput.value = '';
-    if (searchResults) searchResults.innerHTML = '';
-  }
+          // Slide default nav up, slide article nav down
+          topNav.classList.add('slide-up');
+          articleNav.classList.add('visible');
 
-  // Event listeners for both search buttons (masthead and sticky nav)
-  if (searchToggle) {
-    searchToggle.addEventListener('click', openSearch);
-  }
+          setTimeout(() => { navSwitchCooldown = false; }, NAV_SWITCH_DELAY);
+        }
 
-  const stickySearchToggle = document.getElementById('sticky-search-toggle');
-  if (stickySearchToggle) {
-    stickySearchToggle.addEventListener('click', openSearch);
-  }
+        function hideArticleNav() {
+          if (!articleNavShown || navSwitchCooldown) return;
+          articleNavShown = false;
+          navSwitchCooldown = true;
 
-  if (searchClose) {
-    searchClose.addEventListener('click', closeSearch);
-  }
+          // Slide article nav up, slide default nav back down
+          articleNav.classList.remove('visible');
+          topNav.classList.remove('slide-up');
 
-  if (searchInput) {
-    searchInput.addEventListener('input', function(e) {
-      performSearch(e.target.value);
-    });
+          setTimeout(() => { navSwitchCooldown = false; }, NAV_SWITCH_DELAY);
+        }
 
-    searchInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeSearch();
+        function handleArticleWheel(e) {
+          // Scroll down: show article nav
+          if (e.deltaY > 0 && !articleNavShown) {
+            showArticleNav();
+          }
+          // Scroll up anywhere: show default nav
+          if (e.deltaY < 0 && articleNavShown) {
+            hideArticleNav();
+          }
+        }
+
+        window.addEventListener('wheel', handleArticleWheel, { passive: true });
+      } else {
+        // Other inner pages: show scrolled nav with branding
+        topNav.classList.add('scrolled');
+        if (navBranding) {
+          navBranding.style.opacity = '1';
+        }
       }
-    });
-  }
-
-  // Close on overlay background click
-  if (searchOverlay) {
-    searchOverlay.addEventListener('click', function(e) {
-      if (e.target === searchOverlay) {
-        closeSearch();
-      }
-    });
-  }
-
-  // Close on Escape key (global)
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && searchOverlay?.classList.contains('active')) {
-      closeSearch();
     }
-  });
+
+    if (isHomepage) {
+      let isCollapsed = false;
+      let isAnimating = false;
+      const mastheadHeight = masthead.offsetHeight;
+
+      // Branding reveal progress (0 = hidden, 1 = fully visible)
+      let brandingProgress = 0;
+      const BRANDING_STEP = 0.5; // Each scroll moves 50%
+
+      function updateBrandingPosition() {
+        if (!navBranding) return;
+        // translateY goes from 100% (hidden below) to -50% (centered)
+        // So total distance is 150% and we interpolate based on progress
+        const translateY = 100 - (brandingProgress * 150);
+        navBranding.style.transform = `translateX(-50%) translateY(${translateY}%)`;
+        navBranding.style.opacity = brandingProgress;
+      }
+
+      function handleWheel(e) {
+        if (isAnimating) {
+          e.preventDefault();
+          return;
+        }
+
+        // Scroll DOWN: hero slides up to cover masthead
+        if (e.deltaY > 0 && !isCollapsed) {
+          e.preventDefault();
+          isAnimating = true;
+          isCollapsed = true;
+
+          // Delay nav transition until hero has mostly covered masthead
+          setTimeout(() => {
+            topNav.classList.add('scrolled');
+            mainContent.classList.add('has-shadow');
+          }, 300);
+
+          if (typeof gsap !== 'undefined') {
+            gsap.to(mainContent, {
+              marginTop: -mastheadHeight,
+              duration: 0.5,
+              ease: 'power2.out',
+              onComplete: () => { isAnimating = false; }
+            });
+          } else {
+            mainContent.style.transition = 'margin-top 0.5s ease';
+            mainContent.style.marginTop = -mastheadHeight + 'px';
+            setTimeout(() => { isAnimating = false; }, 500);
+          }
+          return;
+        }
+
+        // Scroll UP: hero slides back down to reveal masthead
+        if (e.deltaY < 0 && isCollapsed && window.scrollY === 0) {
+          e.preventDefault();
+          isAnimating = true;
+          isCollapsed = false;
+
+          // Reset branding progress
+          brandingProgress = 0;
+          updateBrandingPosition();
+
+          topNav.classList.remove('scrolled');
+          mainContent.classList.remove('has-shadow');
+
+          if (typeof gsap !== 'undefined') {
+            gsap.to(mainContent, {
+              marginTop: 0,
+              duration: 0.5,
+              ease: 'power2.out',
+              onComplete: () => { isAnimating = false; }
+            });
+          } else {
+            mainContent.style.transition = 'margin-top 0.5s ease';
+            mainContent.style.marginTop = '0';
+            setTimeout(() => { isAnimating = false; }, 500);
+          }
+          return;
+        }
+      }
+
+      // Handle gradual branding reveal after collapse
+      function handleBrandingScroll(e) {
+        if (!isCollapsed || !navBranding) return;
+
+        // Scroll down: reveal more
+        if (e.deltaY > 0 && brandingProgress < 1) {
+          brandingProgress = Math.min(1, brandingProgress + BRANDING_STEP);
+          updateBrandingPosition();
+        }
+        // Scroll up: hide more (but only if at top)
+        if (e.deltaY < 0 && brandingProgress > 0 && window.scrollY === 0) {
+          brandingProgress = Math.max(0, brandingProgress - BRANDING_STEP);
+          updateBrandingPosition();
+        }
+      }
+
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      window.addEventListener('wheel', handleBrandingScroll, { passive: true });
+
+      // Hero text padding that fades on scroll
+      const heroText = document.querySelector('.hero-text');
+      if (heroText) {
+        const MAX_EXTRA_PADDING = 80; // pixels
+        const SCROLL_DISTANCE = 300; // pixels to fully reduce padding
+
+        function updateHeroPadding() {
+          const scrollY = window.scrollY;
+          const progress = Math.min(1, scrollY / SCROLL_DISTANCE);
+          const extraPadding = MAX_EXTRA_PADDING * (1 - progress);
+          heroText.style.setProperty('--hero-extra-padding', extraPadding + 'px');
+        }
+
+        window.addEventListener('scroll', updateHeroPadding, { passive: true });
+        updateHeroPadding(); // Initial call
+      }
+    }
+  }
+
+  // =================================================================
+  // ARTICLE NAV - Share button and progress bar
+  // =================================================================
+
+  function setupShareButton() {
+    // Setup share links
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(document.title);
+
+    const twitterLink = document.getElementById('share-twitter');
+    const facebookLink = document.getElementById('share-facebook');
+    const linkedinLink = document.getElementById('share-linkedin');
+    const emailLink = document.getElementById('share-email');
+
+    if (twitterLink) {
+      twitterLink.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+      twitterLink.target = '_blank';
+      twitterLink.rel = 'noopener noreferrer';
+    }
+
+    if (facebookLink) {
+      facebookLink.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      facebookLink.target = '_blank';
+      facebookLink.rel = 'noopener noreferrer';
+    }
+
+    if (linkedinLink) {
+      linkedinLink.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+      linkedinLink.target = '_blank';
+      linkedinLink.rel = 'noopener noreferrer';
+    }
+
+    if (emailLink) {
+      emailLink.href = `mailto:?subject=${pageTitle}&body=Check out this article: ${decodeURIComponent(pageUrl)}`;
+    }
+  }
+
+  function setupProgressBar() {
+    if (!articleProgressFill || !postContainer) return;
+
+    function updateProgress() {
+      // Get the bounding rect relative to viewport (use full article container)
+      const rect = postContainer.getBoundingClientRect();
+      const articleHeight = postContainer.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      // Progress = 0 when top of article is at top of viewport
+      // Progress = 100 when bottom of article reaches bottom of viewport
+      // scrollDistance = how far we need to scroll through the article
+      const scrollDistance = articleHeight - windowHeight;
+
+      if (scrollDistance <= 0) {
+        // Article fits in viewport, show full progress
+        articleProgressFill.style.width = '100%';
+        return;
+      }
+
+      // rect.top is negative when we've scrolled past the top of article
+      // When rect.top = 0, we're at the start (0%)
+      // When rect.top = -scrollDistance, we're at the end (100%)
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollDistance));
+      articleProgressFill.style.width = (progress * 100) + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress(); // Initial call
+  }
 
 })();

@@ -7,12 +7,9 @@ author: Andraž Tavčar
 author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/insurance-aint-all-that.png
 excerpt: >-
-  In a world that increasingly trades complexity for convenience, Slovenia’s
+  In a world that increasingly trades complexity for convenience, Slovenia's
   insurance leaders gathered last week to make a stark case: maturity still
   matters.
-background_color: '#edf5f4'
-accent_color: '#185a4e'
-hero_color: '#bdd9d4'
 ---
 
 The Slovenian insurance industry opened its flagship annual conference this week with an uncomfortable truth. Their sector is not and should not try to be fashionable. Nor, as Sergej Simoniti put it, should it be designed for Instagram.

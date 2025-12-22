@@ -10,7 +10,7 @@ layout: default
 <!-- HERO SECTION (full width) -->
 <section class="hero-section">
   <a href="{{ featured_post.url | relative_url }}" class="hero-link">
-    <div class="hero-grid" {% if featured_post.hero_color %}style="background-color: {{ featured_post.hero_color }};"{% endif %}>
+    <div class="hero-grid">
       <div class="hero-text">
         <span class="category-tag {{ featured_post.category }}">
           {% if featured_post.category_display %}{{ featured_post.category_display }}{% else %}{{ featured_post.category }}{% endif %}
@@ -46,9 +46,9 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
           {% else %}
-            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
           {% endif %}
         </a>
         <div class="article-content">
@@ -58,7 +58,7 @@ layout: default
           <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
           <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
           {% if post.author %}
-            <div class="article-author">{{ post.author }}</div>
+            <span class="article-author">By {{ post.author }}</span>
           {% endif %}
         </div>
       </article>
@@ -175,9 +175,9 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
           {% else %}
-            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail">
+            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
           {% endif %}
         </a>
         <div class="article-content">
@@ -187,7 +187,7 @@ layout: default
           <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
           <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
           {% if post.author %}
-            <div class="article-author">{{ post.author }}</div>
+            <span class="article-author">By {{ post.author }}</span>
           {% endif %}
         </div>
       </article>
