@@ -11,23 +11,60 @@ layout: default
 <section class="hero-section">
   <div class="hero-grid">
     <div class="hero-text">
-      <span class="category-tag {{ featured_post.category }}">
-        {% if featured_post.category_display %}{{ featured_post.category_display }}{% else %}{{ featured_post.category }}{% endif %}
-      </span>
       <h1 class="hero-headline"><a href="{{ featured_post.url | relative_url }}" class="hero-headline-link">{{ featured_post.title }}</a></h1>
       {% if featured_post.excerpt %}
         <p class="hero-summary">{{ featured_post.excerpt | strip_html | truncate: 220 }}</p>
       {% endif %}
-      {% if featured_post.author %}
+      <!-- {% if featured_post.author %}
         <div class="hero-author">By {{ featured_post.author }}</div>
-      {% endif %}
+      {% endif %} -->
     </div>
     <a href="{{ featured_post.url | relative_url }}" class="hero-image-link">
       <div class="hero-image-wrapper">
         {% if featured_post.image %}
-          <img src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title }}" class="hero-image">
+          {% assign img_path = featured_post.image | relative_url %}
+          {% assign img_base = img_path | split: '.' | first %}
+          {% assign img_ext = img_path | split: '.' | last %}
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ img_path }}"
+              sizes="100vw">
+            <source
+              media="(min-width: 768px)"
+              srcset="{{ img_path }}"
+              sizes="50vw">
+            <img
+              src="{{ img_path }}"
+              alt="{{ featured_post.title }}"
+              class="hero-image"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high">
+          </picture>
         {% else %}
-          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&h=562&fit=crop" alt="Featured article" class="hero-image">
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop&auto=format 400w,
+                      https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=450&fit=crop&auto=format 600w,
+                      https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop&auto=format 800w"
+              sizes="100vw">
+            <source
+              media="(min-width: 768px)"
+              srcset="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=800&fit=crop&auto=format 600w,
+                      https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=1067&fit=crop&auto=format 800w,
+                      https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&h=1333&fit=crop&auto=format 1000w,
+                      https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=1600&fit=crop&auto=format 1200w"
+              sizes="50vw">
+            <img
+              src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&h=1333&fit=crop&auto=format"
+              alt="Featured article"
+              class="hero-image"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high">
+          </picture>
         {% endif %}
       </div>
     </a>
@@ -46,9 +83,24 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
+            <img
+              src="{{ post.image | relative_url }}"
+              alt="{{ post.title }}"
+              class="article-thumbnail"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 48em) 100vw, 400px">
           {% else %}
-            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
+            <img
+              src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format"
+              srcset="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop&auto=format 240w,
+                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format 400w,
+                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=600&h=300&fit=crop&auto=format 600w"
+              sizes="(max-width: 48em) 100vw, 400px"
+              alt="{{ post.title }}"
+              class="article-thumbnail"
+              loading="lazy"
+              decoding="async">
           {% endif %}
         </a>
         <div class="article-content">
@@ -70,7 +122,15 @@ layout: default
 <section class="newsletter-section">
   <div class="newsletter-container">
     <div class="newsletter-image">
-      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=600&fit=crop" alt="Newsletter">
+      <img
+        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=400&fit=crop&auto=format"
+        srcset="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300&h=300&fit=crop&auto=format 300w,
+                https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=400&fit=crop&auto=format 400w,
+                https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=600&fit=crop&auto=format 600w"
+        sizes="(max-width: 48em) 200px, 300px"
+        alt="Newsletter"
+        loading="lazy"
+        decoding="async">
     </div>
     <div class="newsletter-content">
       <p class="newsletter-eyebrow">Our newsletter</p>
@@ -175,9 +235,24 @@ layout: default
       <article class="article-item">
         <a href="{{ post.url | relative_url }}" class="article-image-link">
           {% if post.image %}
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
+            <img
+              src="{{ post.image | relative_url }}"
+              alt="{{ post.title }}"
+              class="article-thumbnail"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 48em) 100vw, 400px">
           {% else %}
-            <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop" alt="{{ post.title }}" class="article-thumbnail" loading="lazy">
+            <img
+              src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format"
+              srcset="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop&auto=format 240w,
+                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format 400w,
+                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=600&h=300&fit=crop&auto=format 600w"
+              sizes="(max-width: 48em) 100vw, 400px"
+              alt="{{ post.title }}"
+              class="article-thumbnail"
+              loading="lazy"
+              decoding="async">
           {% endif %}
         </a>
         <div class="article-content">

@@ -187,7 +187,19 @@
     if (isHomepage) {
       let isCollapsed = false;
       let isAnimating = false;
-      const mastheadHeight = masthead.offsetHeight;
+      let mastheadHeight = masthead.offsetHeight;
+
+      // Recalculate height after SVG loads (it may affect layout)
+      const siteTitleSvg = masthead.querySelector('.site-title-svg');
+      if (siteTitleSvg) {
+        if (siteTitleSvg.complete) {
+          mastheadHeight = masthead.offsetHeight;
+        } else {
+          siteTitleSvg.addEventListener('load', () => {
+            mastheadHeight = masthead.offsetHeight;
+          });
+        }
+      }
 
       // Branding reveal progress (0 = hidden, 1 = fully visible)
       let brandingProgress = 0;

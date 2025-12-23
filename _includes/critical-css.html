@@ -66,45 +66,31 @@ body {
 .masthead {
   background-color: #faf0f0;
   text-align: left;
-  padding: 2rem 5rem 0;
+  padding: 3rem 5rem 2rem;
   position: relative;
 }
 
-.masthead-container {
-  max-width: none;
-  margin: 0;
-}
-
-.masthead-divider {
+.masthead-brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
-}
-
-.masthead-divider::before {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background-color: #1a1a1a;
-}
-
-.masthead-tagline {
-  font-family: 'Adriatic Journal', Georgia, serif;
-  font-size: 2.15rem;
-  color: #1a1a1a;
-  white-space: nowrap;
+  justify-content: space-between;
+  position: relative;
 }
 
 .site-title {
-  color: #bd2d2d;
   text-decoration: none;
-  font-family: 'Adriatic Journal', Georgia, serif;
-  font-size: clamp(5rem, 22vw, 14rem);
-  text-transform: uppercase;
-  line-height: 0.5;
-  padding: 0.15em 0 1em;
   display: block;
   margin: 0;
+  padding: 0;
+  background-color: #faf0f0;
+  position: relative;
+  z-index: 2;
+}
+
+.site-title-svg {
+  width: auto;
+  height: clamp(90px, 13vw, 160px);
+  display: block;
 }
 
 /* Top nav */
