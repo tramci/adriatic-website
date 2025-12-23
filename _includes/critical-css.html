@@ -63,16 +63,20 @@ body {
 }
 
 /* Masthead - above the fold */
-.masthead-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.masthead {
+  background-color: #bd2d2d;
+  text-align: center;
+  padding: 2rem 1rem 2.5rem;
   position: relative;
 }
 
+.masthead-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 .title-wrap {
   text-align: center;
-  margin-bottom: 0;
 }
 
 .site-title {
@@ -94,31 +98,20 @@ body {
 
 .title-the {
   font-size: clamp(2.67rem, 12vw, 8rem);
-  margin-top: 0;
-  margin-bottom: -0.15em;
 }
 
 .title-adriatic {
   font-size: clamp(2.67rem, 12vw, 8rem);
+  margin-top: -0.1em;
 }
 
 .site-blurb {
-  display: block;
-  margin-top: 1.33rem;
+  margin-top: 1rem;
   font-family: 'Adriatic22', Georgia, serif;
   font-style: italic;
   font-weight: 400;
   color: #ffffff;
-  font-size: 1.67rem;
-  text-decoration: none;
-}
-
-.masthead {
-  background-color: #bd2d2d;
-  text-align: center;
-  padding: 0;
-  position: relative;
-  margin-bottom: 0;
+  font-size: 1.5rem;
 }
 
 /* Top nav */
@@ -138,7 +131,7 @@ body {
 
 .nav-container {
   width: 100%;
-  padding: 0.6rem 2rem;
+  padding: 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -307,7 +300,7 @@ body {
 .article-nav-container {
   display: flex;
   align-items: center;
-  padding: 0.6rem 2rem;
+  padding: 0.75rem 1.5rem;
   gap: 1rem;
 }
 
@@ -462,7 +455,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 1.5rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .menu-close {

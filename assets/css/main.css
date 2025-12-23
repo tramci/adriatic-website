@@ -167,35 +167,6 @@ html {
 }
 
 /* =======================================================================
-   NAVIGATION — Clean centered spacing
-   ======================================================================= */
-.main-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15rem;
-  list-style: none;
-  margin: 0 0 0rem 0;
-  padding: 0;
-}
-
-/* Navigation links */
-.main-nav a {
-  font-family: 'Adriatic Journal', Georgia, serif;
-  text-transform: lowercase;
-  letter-spacing: 0.5px;
-  font-weight: 400;
-  font-size: 1.4rem;
-  color: var(--z-ds-color-text-70);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.main-nav a:hover {
-  color: #bd2d2d;
-}
-
-/* =======================================================================
    CATEGORY TAGS
    ======================================================================= */
 .category-tag {
@@ -1797,29 +1768,11 @@ html {
 /* General masthead/nav responsive */
 @media (max-width: 48em) {
   .masthead {
-    padding: 0.5rem 1rem 0rem 1rem;
-    border-bottom: none;
+    padding: 1.5rem 1rem 2rem;
   }
-  
-  .masthead-container {
-    max-width: none;
-    margin: 0;
-    padding: 25px 0 0 0;
-    border-bottom: none;
-  }
-  
-  .main-nav {
-    margin-bottom: 0.5rem;
-  }
-  
+
   .main-content {
-    margin-top: 0;
-    padding: 15px var(--z-ds-space-s);
-  }
-  
-  .site-title::before,
-  .site-title::after {
-    font-size: 2.25rem;
+    padding: var(--z-ds-space-s);
   }
   
   /* Posts page responsive */
@@ -2022,20 +1975,6 @@ html {
   
   .category-description {
     font-size: var(--z-ds-fontsize-16);
-  }
-}
-
-@media (max-width: 25em) {
-  .main-nav {
-    gap: 0.5rem;
-    width: fit-content;
-    margin: 0 auto;
-  }
-  
-  .main-nav a {
-    font-size: 0.85rem;
-    letter-spacing: 0;
-    padding: 0 var(--z-ds-space-xxs);
   }
 }
 
