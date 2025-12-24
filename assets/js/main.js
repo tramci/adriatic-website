@@ -97,10 +97,40 @@
   });
 
   // =================================================================
-  // MASTHEAD SCROLL ANIMATION - Hero slides up to cover masthead
+  // ABOVE-FOLD HEIGHT - Dynamic calculation based on masthead
   // =================================================================
 
   const masthead = document.querySelector('.masthead');
+  const aboveFold = document.querySelector('.above-fold');
+
+  // Only run on homepage where above-fold exists
+  if (masthead && aboveFold) {
+    function updateAboveFoldHeight() {
+      const mastheadHeight = masthead.offsetHeight;
+      aboveFold.style.height = `calc(100vh - ${mastheadHeight}px)`;
+    }
+
+    // Recalculate height after SVG loads (it may affect layout)
+    const siteTitleSvg = masthead.querySelector('.site-title-svg');
+    if (siteTitleSvg) {
+      if (siteTitleSvg.complete) {
+        updateAboveFoldHeight();
+      } else {
+        siteTitleSvg.addEventListener('load', updateAboveFoldHeight);
+      }
+    }
+
+    // Also update on resize
+    window.addEventListener('resize', updateAboveFoldHeight);
+
+    // Initial call
+    updateAboveFoldHeight();
+  }
+
+  // =================================================================
+  // MASTHEAD SCROLL ANIMATION - Hero slides up to cover masthead
+  // =================================================================
+
   const topNav = document.querySelector('.top-nav');
   const mainContent = document.querySelector('.main-content');
   const navBranding = document.querySelector('.nav-issue-scrolling');
@@ -188,31 +218,6 @@
       let isCollapsed = false;
       let isAnimating = false;
       let mastheadHeight = masthead.offsetHeight;
-
-      // Above-fold wrapper - set height dynamically based on actual masthead height
-      const aboveFold = document.querySelector('.above-fold');
-
-      function updateAboveFoldHeight() {
-        if (!aboveFold) return;
-        mastheadHeight = masthead.offsetHeight;
-        aboveFold.style.height = `calc(100vh - ${mastheadHeight}px)`;
-      }
-
-      // Recalculate height after SVG loads (it may affect layout)
-      const siteTitleSvg = masthead.querySelector('.site-title-svg');
-      if (siteTitleSvg) {
-        if (siteTitleSvg.complete) {
-          updateAboveFoldHeight();
-        } else {
-          siteTitleSvg.addEventListener('load', updateAboveFoldHeight);
-        }
-      }
-
-      // Also update on resize
-      window.addEventListener('resize', updateAboveFoldHeight);
-
-      // Initial call
-      updateAboveFoldHeight();
 
       // Branding reveal progress (0 = hidden, 1 = fully visible)
       let brandingProgress = 0;
