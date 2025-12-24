@@ -476,13 +476,13 @@ html {
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 600px;
+  height: 600px;
   background-color: #faf0f0;
   width: 100%;
 }
 
 .hero-text {
-  padding: var(--z-ds-space-xxl) 5%;
+  padding: var(--z-ds-space-xxl) 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -536,7 +536,7 @@ html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding-right: 5rem;
+  padding-right: 5vw;
 }
 
 .hero-image {
@@ -564,7 +564,6 @@ html {
 
   .hero-image-wrapper {
     min-height: 400px;
-    padding-right: var(--z-ds-space-l);
   }
 }
 
@@ -579,7 +578,6 @@ html {
 
   .hero-image-wrapper {
     min-height: 300px;
-    padding-right: 0;
   }
 }
 
