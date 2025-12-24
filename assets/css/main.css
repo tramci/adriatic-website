@@ -451,9 +451,8 @@ html {
 .above-fold {
   display: flex;
   flex-direction: column;
-  /* Subtract masthead height: ~160px SVG + ~80px padding = ~240px */
-  /* Use height (not min-height) so it shrinks when viewport shrinks */
-  height: calc(100vh - 240px);
+  /* Subtract masthead height - JS will set precise value */
+  min-height: calc(100vh - 240px);
   background-color: #faf0f0;
 }
 
@@ -467,7 +466,6 @@ html {
 .above-fold .hero-grid {
   flex: 1;
   height: auto;
-  min-height: 0;
 }
 
 /* Bottom navigation bar */
@@ -505,7 +503,7 @@ html {
 @media (max-width: 48em) {
   .above-fold {
     /* Smaller masthead on mobile */
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
   }
 
   .home-bottom-nav-container {
@@ -610,6 +608,10 @@ html {
   height: 100%;
   overflow: hidden;
   padding: 1rem 1.5rem 1rem 0;
+}
+
+.hero-image-wrapper.fullbleed {
+  padding: 0;
 }
 
 @media (min-width: 768px) {

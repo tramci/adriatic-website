@@ -107,7 +107,7 @@
   if (masthead && aboveFold) {
     function updateAboveFoldHeight() {
       const mastheadHeight = masthead.offsetHeight;
-      aboveFold.style.height = `calc(100vh - ${mastheadHeight}px)`;
+      aboveFold.style.minHeight = `calc(100vh - ${mastheadHeight}px)`;
     }
 
     // Recalculate height after SVG loads (it may affect layout)

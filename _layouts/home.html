@@ -22,7 +22,7 @@ layout: default
         {% endif %} -->
       </div>
       <a href="{{ featured_post.url | relative_url }}" class="hero-image-link">
-        <div class="hero-image-wrapper">
+        <div class="hero-image-wrapper{% if featured_post.image_fullbleed %} fullbleed{% endif %}">
           {% if featured_post.image %}
             {% assign img_path = featured_post.image | relative_url %}
             {% assign img_base = img_path | split: '.' | first %}
