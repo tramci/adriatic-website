@@ -189,17 +189,30 @@
       let isAnimating = false;
       let mastheadHeight = masthead.offsetHeight;
 
+      // Above-fold wrapper - set height dynamically based on actual masthead height
+      const aboveFold = document.querySelector('.above-fold');
+
+      function updateAboveFoldHeight() {
+        if (!aboveFold) return;
+        mastheadHeight = masthead.offsetHeight;
+        aboveFold.style.height = `calc(100vh - ${mastheadHeight}px)`;
+      }
+
       // Recalculate height after SVG loads (it may affect layout)
       const siteTitleSvg = masthead.querySelector('.site-title-svg');
       if (siteTitleSvg) {
         if (siteTitleSvg.complete) {
-          mastheadHeight = masthead.offsetHeight;
+          updateAboveFoldHeight();
         } else {
-          siteTitleSvg.addEventListener('load', () => {
-            mastheadHeight = masthead.offsetHeight;
-          });
+          siteTitleSvg.addEventListener('load', updateAboveFoldHeight);
         }
       }
+
+      // Also update on resize
+      window.addEventListener('resize', updateAboveFoldHeight);
+
+      // Initial call
+      updateAboveFoldHeight();
 
       // Branding reveal progress (0 = hidden, 1 = fully visible)
       let brandingProgress = 0;

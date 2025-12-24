@@ -446,6 +446,79 @@ html {
 }
 
 /* =======================================================================
+   HOMEPAGE STYLES — Above-Fold Wrapper (viewport-filling)
+   ======================================================================= */
+.above-fold {
+  display: flex;
+  flex-direction: column;
+  /* Subtract masthead height: ~160px SVG + ~80px padding = ~240px */
+  /* Use height (not min-height) so it shrinks when viewport shrinks */
+  height: calc(100vh - 240px);
+  background-color: #faf0f0;
+}
+
+.above-fold .hero-section {
+  flex: 1;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.above-fold .hero-grid {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+/* Bottom navigation bar */
+.home-bottom-nav {
+  background-color: #faf0f0;
+  border-top: 1px solid #e8e0e0;
+  padding: 1rem 0;
+  flex-shrink: 0;
+}
+
+.home-bottom-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.home-nav-link {
+  font-family: 'Adriatic22', Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.home-nav-link:hover {
+  color: #bd2d2d;
+}
+
+@media (max-width: 48em) {
+  .above-fold {
+    /* Smaller masthead on mobile */
+    height: calc(100vh - 120px);
+  }
+
+  .home-bottom-nav-container {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .home-nav-link {
+    font-size: 0.75rem;
+  }
+}
+
+/* =======================================================================
    HOMEPAGE STYLES — Hero Section (Split Layout)
    ======================================================================= */
 .hero-section {
@@ -536,13 +609,26 @@ html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding-right: 5vw;
+  padding: 1rem 1.5rem 1rem 0;
+}
+
+@media (min-width: 768px) {
+  .hero-image-wrapper {
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-image-wrapper {
+    padding-right: 3rem;
+  }
 }
 
 .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--image-position, center center);
   display: block;
   transition: filter 0.3s ease;
 }
