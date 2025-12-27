@@ -62,6 +62,98 @@ body {
   background: var(--z-ds-color-background-0);
 }
 
+/* Sticky Navbar - appears when scrolling past masthead */
+.sticky-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #bd2d2d;
+  padding: 0.75rem 3rem;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sticky-navbar.is-visible {
+  transform: translateY(0);
+}
+
+.sticky-navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.sticky-navbar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.sticky-navbar-logo-img {
+  height: 24px;
+  width: auto;
+}
+
+.sticky-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.sticky-navbar-newsletter {
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.sticky-navbar-newsletter:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.sticky-navbar-subscribe {
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #bd2d2d;
+  background-color: #ffffff;
+  padding: 3px 9px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.sticky-navbar-subscribe:hover {
+  opacity: 0.9;
+}
+
+.sticky-navbar-search {
+  color: #ffffff;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.sticky-navbar-search:hover {
+  opacity: 0.8;
+}
+
+.sticky-navbar-search svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Masthead - above the fold */
 .masthead {
   background-color: #faf0f0;
@@ -158,159 +250,6 @@ body {
   display: block;
 }
 
-/* Top nav */
-.top-nav {
-  background-color: #faf0f0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.top-nav.scrolled {
-  background-color: #faf0f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-
-.nav-container {
-  width: 100%;
-  padding: 0.75rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hamburger-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  color: rgba(189, 45, 45, 0.12);
-  transition: color 0.3s ease;
-}
-
-.hamburger-button:hover {
-  color: rgba(189, 45, 45, 0.3);
-}
-
-.hamburger-button svg {
-  width: 40px;
-  height: 40px;
-}
-
-.nav-subscribe-link {
-  font-family: 'Lado Bold Condensed', Arial Narrow, sans-serif;
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: rgba(189, 45, 45, 0.12);
-  text-decoration: none;
-  line-height: 1;
-  transition: color 0.3s ease;
-}
-
-.nav-subscribe-link:hover {
-  color: rgba(189, 45, 45, 0.3);
-}
-
-.nav-issue {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-issue-short {
-  font-family: 'Lado', Arial Narrow, sans-serif;
-  font-size: 1.75rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #1a1a1a;
-  transition: opacity 0.3s ease;
-}
-
-/* Scrolling version - separate element for the full branding */
-.nav-issue-scrolling {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(100%);
-  display: flex;
-  align-items: center;
-  font-family: 'Lado', Arial Narrow, sans-serif;
-  font-size: 1.75rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  color: #bd2d2d;
-  line-height: 1;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-  text-decoration: none;
-}
-
-.nav-issue-title {
-  font-family: 'Adriatic Journal', Georgia, serif;
-  font-size: 3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  transform: translateY(-0.2em);
-}
-
-.nav-issue-nr {
-  font-family: 'Adriatic22', Georgia, serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.1rem;
-  text-transform: lowercase;
-  letter-spacing: 0;
-  margin-right: 0.1em;
-}
-
-.nav-issue-num {
-  font-size: 1.1rem;
-}
-
-/* When scrolled: hide short, show scrolling version */
-.top-nav.scrolled .nav-issue-short {
-  opacity: 0;
-}
-
-.top-nav.scrolled .nav-issue-scrolling {
-  pointer-events: auto;
-}
-
-/* Article pages: show branding immediately without animation */
-.top-nav.article-mode .nav-issue-scrolling {
-  transition: none;
-  transform: translateX(-50%) translateY(-50%);
-  opacity: 1;
-}
-
-.top-nav.scrolled .hamburger-button {
-  color: #1a1a1a;
-}
-
-.top-nav.scrolled .hamburger-button:hover {
-  color: #000000;
-}
-
-.top-nav.scrolled .nav-subscribe-link {
-  color: #1a1a1a;
-}
-
-.top-nav.scrolled .nav-subscribe-link:hover {
-  color: #000000;
-}
-
 /* Article Nav - shown on article pages */
 .article-nav {
   position: fixed;
@@ -326,17 +265,6 @@ body {
 
 .article-nav.visible {
   transform: translateY(0);
-}
-
-/* Top nav fixed mode for article pages (allows slide animation) */
-.top-nav.article-mode {
-  position: fixed;
-  left: 0;
-  right: 0;
-}
-
-.top-nav.slide-up {
-  transform: translateY(-100%);
 }
 
 .article-nav-container {
@@ -715,17 +643,11 @@ body {
 .main-content {
   padding: var(--z-ds-space-m) 0 var(--z-ds-space-m);
   background-color: #faf0f0;
-  position: relative;
-  z-index: 1;
 }
 
 /* Homepage: remove top padding so hero is flush */
 body.is-homepage .main-content {
   padding-top: 0;
-}
-
-.main-content.has-shadow {
-  box-shadow: inset 0 8px 16px -8px rgba(0, 0, 0, 0.2);
 }
 
 /* Article page: add top padding to compensate for fixed nav */

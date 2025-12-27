@@ -128,208 +128,28 @@
   }
 
   // =================================================================
-  // MASTHEAD SCROLL ANIMATION - Hero slides up to cover masthead
+  // ARTICLE PAGE SETUP
   // =================================================================
 
-  const topNav = document.querySelector('.top-nav');
-  const mainContent = document.querySelector('.main-content');
-  const navBranding = document.querySelector('.nav-issue-scrolling');
-
-  // Article nav elements
   const articleNav = document.getElementById('article-nav');
   const articleProgressFill = document.getElementById('article-progress-fill');
   const postContent = document.querySelector('.post-content');
   const postContainer = document.querySelector('.post-container');
 
-  if (masthead && topNav && mainContent) {
-    // Only apply on homepage
-    const isHomepage = window.location.pathname === '/' ||
-                       window.location.pathname === '/azt/' ||
-                       window.location.pathname.endsWith('/azt/');
+  // Check if this is an article page (has post content)
+  const isArticlePage = !!postContent;
 
-    // Check if this is an article page (has post content)
-    const isArticlePage = !!postContent;
+  if (isArticlePage && articleNav) {
+    body.classList.add('article-page');
 
-    if (!isHomepage) {
-      // Hide masthead on all inner pages
+    // Hide masthead on article pages
+    if (masthead) {
       masthead.style.display = 'none';
-      mainContent.classList.add('has-shadow');
-
-      if (isArticlePage && articleNav) {
-        // Article pages: start with default nav (scrolled), switch to article nav on scroll
-        let articleNavShown = false;
-        let navSwitchCooldown = false;
-        const NAV_SWITCH_DELAY = 800; // ms delay between switches
-
-        topNav.classList.add('scrolled');
-        topNav.classList.add('article-mode');
-        body.classList.add('article-page');
-
-        // Setup share button and progress bar
-        setupShareButton();
-        setupProgressBar();
-
-        function showArticleNav() {
-          if (articleNavShown || navSwitchCooldown) return;
-          articleNavShown = true;
-          navSwitchCooldown = true;
-
-          // Slide default nav up, slide article nav down
-          topNav.classList.add('slide-up');
-          articleNav.classList.add('visible');
-
-          setTimeout(() => { navSwitchCooldown = false; }, NAV_SWITCH_DELAY);
-        }
-
-        function hideArticleNav() {
-          if (!articleNavShown || navSwitchCooldown) return;
-          articleNavShown = false;
-          navSwitchCooldown = true;
-
-          // Slide article nav up, slide default nav back down
-          articleNav.classList.remove('visible');
-          topNav.classList.remove('slide-up');
-
-          setTimeout(() => { navSwitchCooldown = false; }, NAV_SWITCH_DELAY);
-        }
-
-        function handleArticleWheel(e) {
-          // Scroll down: show article nav
-          if (e.deltaY > 0 && !articleNavShown) {
-            showArticleNav();
-          }
-          // Scroll up anywhere: show default nav
-          if (e.deltaY < 0 && articleNavShown) {
-            hideArticleNav();
-          }
-        }
-
-        window.addEventListener('wheel', handleArticleWheel, { passive: true });
-      } else {
-        // Other inner pages: show scrolled nav with branding
-        topNav.classList.add('scrolled');
-        if (navBranding) {
-          navBranding.style.opacity = '1';
-        }
-      }
     }
 
-    if (isHomepage) {
-      let isCollapsed = false;
-      let isAnimating = false;
-      let mastheadHeight = masthead.offsetHeight;
-
-      // Branding reveal progress (0 = hidden, 1 = fully visible)
-      let brandingProgress = 0;
-      const BRANDING_STEP = 0.5; // Each scroll moves 50%
-
-      function updateBrandingPosition() {
-        if (!navBranding) return;
-        // translateY goes from 100% (hidden below) to -50% (centered)
-        // So total distance is 150% and we interpolate based on progress
-        const translateY = 100 - (brandingProgress * 150);
-        navBranding.style.transform = `translateX(-50%) translateY(${translateY}%)`;
-        navBranding.style.opacity = brandingProgress;
-      }
-
-      function handleWheel(e) {
-        if (isAnimating) {
-          e.preventDefault();
-          return;
-        }
-
-        // Scroll DOWN: hero slides up to cover masthead
-        if (e.deltaY > 0 && !isCollapsed) {
-          e.preventDefault();
-          isAnimating = true;
-          isCollapsed = true;
-
-          // Delay nav transition until hero has mostly covered masthead
-          setTimeout(() => {
-            topNav.classList.add('scrolled');
-            mainContent.classList.add('has-shadow');
-          }, 300);
-
-          if (typeof gsap !== 'undefined') {
-            gsap.to(mainContent, {
-              marginTop: -mastheadHeight,
-              duration: 0.5,
-              ease: 'power2.out',
-              onComplete: () => { isAnimating = false; }
-            });
-          } else {
-            mainContent.style.transition = 'margin-top 0.5s ease';
-            mainContent.style.marginTop = -mastheadHeight + 'px';
-            setTimeout(() => { isAnimating = false; }, 500);
-          }
-          return;
-        }
-
-        // Scroll UP: hero slides back down to reveal masthead
-        if (e.deltaY < 0 && isCollapsed && window.scrollY === 0) {
-          e.preventDefault();
-          isAnimating = true;
-          isCollapsed = false;
-
-          // Reset branding progress
-          brandingProgress = 0;
-          updateBrandingPosition();
-
-          topNav.classList.remove('scrolled');
-          mainContent.classList.remove('has-shadow');
-
-          if (typeof gsap !== 'undefined') {
-            gsap.to(mainContent, {
-              marginTop: 0,
-              duration: 0.5,
-              ease: 'power2.out',
-              onComplete: () => { isAnimating = false; }
-            });
-          } else {
-            mainContent.style.transition = 'margin-top 0.5s ease';
-            mainContent.style.marginTop = '0';
-            setTimeout(() => { isAnimating = false; }, 500);
-          }
-          return;
-        }
-      }
-
-      // Handle gradual branding reveal after collapse
-      function handleBrandingScroll(e) {
-        if (!isCollapsed || !navBranding) return;
-
-        // Scroll down: reveal more
-        if (e.deltaY > 0 && brandingProgress < 1) {
-          brandingProgress = Math.min(1, brandingProgress + BRANDING_STEP);
-          updateBrandingPosition();
-        }
-        // Scroll up: hide more (but only if at top)
-        if (e.deltaY < 0 && brandingProgress > 0 && window.scrollY === 0) {
-          brandingProgress = Math.max(0, brandingProgress - BRANDING_STEP);
-          updateBrandingPosition();
-        }
-      }
-
-      window.addEventListener('wheel', handleWheel, { passive: false });
-      window.addEventListener('wheel', handleBrandingScroll, { passive: true });
-
-      // Hero text padding that fades on scroll
-      const heroText = document.querySelector('.hero-text');
-      if (heroText) {
-        const MAX_EXTRA_PADDING = 80; // pixels
-        const SCROLL_DISTANCE = 300; // pixels to fully reduce padding
-
-        function updateHeroPadding() {
-          const scrollY = window.scrollY;
-          const progress = Math.min(1, scrollY / SCROLL_DISTANCE);
-          const extraPadding = MAX_EXTRA_PADDING * (1 - progress);
-          heroText.style.setProperty('--hero-extra-padding', extraPadding + 'px');
-        }
-
-        window.addEventListener('scroll', updateHeroPadding, { passive: true });
-        updateHeroPadding(); // Initial call
-      }
-    }
+    // Setup share button and progress bar
+    setupShareButton();
+    setupProgressBar();
   }
 
   // =================================================================
@@ -399,6 +219,65 @@
 
     window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress(); // Initial call
+  }
+
+  // =================================================================
+  // STICKY NAVBAR - Appears when scrolling past masthead on homepage
+  // =================================================================
+
+  const stickyNavbar = document.getElementById('sticky-navbar');
+  const mastheadEl = document.querySelector('.masthead');
+  const homeBottomNav = document.querySelector('.home-bottom-nav');
+
+  if (stickyNavbar && mastheadEl) {
+    // Use IntersectionObserver to detect when masthead leaves viewport
+    const mastheadObserver = new IntersectionObserver(
+      ([entry]) => {
+        // Show navbar when masthead is NOT intersecting (scrolled past)
+        if (!entry.isIntersecting) {
+          stickyNavbar.classList.add('is-visible');
+        } else {
+          stickyNavbar.classList.remove('is-visible');
+          // Also undock bottom nav when masthead is visible
+          if (homeBottomNav) {
+            homeBottomNav.classList.remove('is-docked');
+          }
+        }
+      },
+      {
+        root: null,
+        threshold: 0,
+        rootMargin: '0px'
+      }
+    );
+
+    mastheadObserver.observe(mastheadEl);
+
+    // Dock bottom nav when it reaches the sticky navbar
+    if (homeBottomNav) {
+      const stickyNavbarHeight = 48; // Height of sticky navbar in pixels
+
+      const bottomNavObserver = new IntersectionObserver(
+        ([entry]) => {
+          // Only dock if sticky navbar is visible
+          if (!stickyNavbar.classList.contains('is-visible')) return;
+
+          // Dock when top of bottom nav reaches the bottom of sticky navbar
+          if (!entry.isIntersecting) {
+            homeBottomNav.classList.add('is-docked');
+          } else {
+            homeBottomNav.classList.remove('is-docked');
+          }
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: `-${stickyNavbarHeight}px 0px 0px 0px`
+        }
+      );
+
+      bottomNavObserver.observe(homeBottomNav);
+    }
   }
 
 })();

@@ -474,6 +474,18 @@ html {
   border-top: 1px solid #e8e0e0;
   padding: 0.5rem 0;
   flex-shrink: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Docked state - attaches to sticky navbar */
+.home-bottom-nav.is-docked {
+  position: fixed;
+  top: 48px; /* Height of sticky navbar */
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-top: none;
+  background-color: #faf0f0;
 }
 
 .home-bottom-nav-container {
@@ -499,6 +511,7 @@ html {
 .home-nav-link:hover {
   color: #bd2d2d;
 }
+
 
 @media (max-width: 48em) {
   .above-fold {
