@@ -1,100 +1,11 @@
 /**
  * The Adriatic - Main JavaScript
- * Handles theme toggling, side panel menu, and search functionality
  */
 
 (function() {
   'use strict';
 
-  // =================================================================
-  // THEME TOGGLE - Segmented control for theme switching
-  // =================================================================
-  
-  const themeToggleSegmented = document.getElementById('theme-toggle');
-  const html = document.documentElement;
-  
-  // Get saved theme or default to 'dark'
-  const currentTheme = localStorage.getItem('theme') || 'dark';
-  html.setAttribute('data-theme', currentTheme);
-  
-  // Initialize theme toggle if it exists
-  if (themeToggleSegmented) {
-    // Set initial active state for all theme options
-    themeToggleSegmented.querySelectorAll('.theme-option').forEach(option => {
-      option.classList.toggle('active', option.dataset.theme === currentTheme);
-    });
-    
-    // Handle theme option clicks
-    themeToggleSegmented.addEventListener('click', function(e) {
-      const clickedOption = e.target.closest('.theme-option');
-      
-      if (clickedOption) {
-        const newTheme = clickedOption.dataset.theme;
-        
-        // Update active states
-        themeToggleSegmented.querySelectorAll('.theme-option').forEach(option => {
-          option.classList.remove('active');
-        });
-        clickedOption.classList.add('active');
-        
-        // Apply theme
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-      }
-    });
-  }
-
-  // =================================================================
-  // HAMBURGER MENU - Full-screen overlay navigation
-  // =================================================================
-
-  const hamburgerToggle = document.getElementById('hamburger-toggle');
-  const menuOverlay = document.getElementById('menu-overlay');
-  const menuClose = document.getElementById('menu-close');
   const body = document.body;
-
-  /**
-   * Opens the hamburger menu overlay
-   */
-  function openHamburgerMenu() {
-    if (!menuOverlay) return;
-
-    menuOverlay.classList.add('active');
-    body.classList.add('menu-open');
-  }
-
-  /**
-   * Closes the hamburger menu overlay
-   */
-  function closeHamburgerMenu() {
-    if (!menuOverlay) return;
-
-    menuOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
-  }
-
-  // Open menu on hamburger click
-  if (hamburgerToggle) {
-    hamburgerToggle.addEventListener('click', openHamburgerMenu);
-  }
-
-  // Close menu on X click
-  if (menuClose) {
-    menuClose.addEventListener('click', closeHamburgerMenu);
-  }
-
-  // Close menu on Escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && menuOverlay && menuOverlay.classList.contains('active')) {
-      closeHamburgerMenu();
-    }
-  });
-
-  // Close menu when clicking navigation links
-  const menuLinks = document.querySelectorAll('.menu-link, .menu-featured-article');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', closeHamburgerMenu);
-  });
 
   // =================================================================
   // ABOVE-FOLD HEIGHT - Dynamic calculation based on masthead
