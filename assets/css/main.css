@@ -485,7 +485,8 @@ html {
   right: 0;
   z-index: 999;
   border-top: none;
-  background-color: #faf0f0;
+  background: #faf0f0 !important;
+  opacity: 1 !important;
 }
 
 .home-bottom-nav-container {
@@ -498,12 +499,11 @@ html {
 }
 
 .home-nav-link {
-  font-family: 'Adriatic22', Arial, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: #1a1a1a;
   text-decoration: none;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: color 0.2s ease;
 }
@@ -611,10 +611,10 @@ html {
 }
 
 .hero-author {
-  font-family: 'SajJY', Verdana, sans-serif;
+  font-family: 'Habi', Georgia, serif;
   color: #888888;
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -931,175 +931,6 @@ html {
   
   .newsletter-description {
     font-size: var(--z-ds-fontsize-16);
-  }
-}
-
-/* =======================================================================
-   NEWSWIRE SECTION
-   ======================================================================= */
-.newswire-section {
-  max-width: 880px;
-  margin: var(--z-ds-space-xxl) auto;
-  padding: 0;
-}
-
-.newswire-container {
-  border-top: 10px solid #020018;
-  border-bottom: 3px solid #020018;
-  padding-top: var(--z-ds-space-m);
-  padding-bottom: var(--z-ds-space-xl);
-}
-
-.newswire-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: var(--z-ds-space-m);
-}
-
-.newswire-header-left {
-  flex: 1;
-}
-
-.newswire-title {
-  font-family: 'Adriatic22', Georgia, serif;
-  font-size: var(--z-ds-fontsize-32);
-  font-weight: 700;
-  color: var(--z-ds-color-text-100);
-  margin: 0 0 0.5rem 0;
-}
-
-.newswire-timestamp {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: var(--z-ds-fontsize-16);
-  font-style: normal;
-  color: #A9A9A9;
-  font-weight: 300;
-  margin: -0.25rem 0 0 0;
-}
-
-/* Live indicator - typewriter status text */
-.newswire-live-indicator {
-  display: inline-flex;
-  align-items: center;
-  margin: 20px;
-}
-
-.live-status-text {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #666;
-}
-
-@keyframes cursor-blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-.live-cursor {
-  font-family: monospace;
-  font-size: 0.875rem;
-  color: #bd2d2d;
-  animation: cursor-blink 1s step-end infinite;
-  margin-left: 1px;
-}
-
-.newswire-content {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--z-ds-space-xl);
-  align-items: start;
-}
-
-.newswire-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: 550px;
-}
-
-.newswire-item {
-  margin-bottom: var(--z-ds-space-xxs);
-}
-
-.newswire-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.newswire-topic {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: var(--z-ds-fontsize-14);
-  font-weight: 700;
-  color: var(--z-ds-color-text-100);
-  display: inline;
-}
-
-.newswire-description {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: var(--z-ds-fontsize-14);
-  font-weight: 400;
-  color: var(--z-ds-color-text-100);
-  line-height: 0.5;
-  display: inline;
-  margin: 0;
-}
-
-.newswire-curator {
-  text-align: right;
-  padding-top: 0;
-  min-width: 150px;
-}
-
-.newswire-curator-label {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: var(--z-ds-fontsize-16);
-  color: #A9A9A9;
-}
-
-.newswire-curator-name {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: var(--z-ds-fontsize-14);
-  font-weight: 700;
-  color: var(--z-ds-color-text-100);
-  margin: 0;
-}
-
-/* Responsive */
-@media (max-width: 48em) {
-  .newswire-section {
-    margin: var(--z-ds-space-xl) auto;
-  }
-  
-  .newswire-content {
-    grid-template-columns: 1fr;
-    gap: var(--z-ds-space-l);
-  }
-  
-  .newswire-curator {
-    text-align: left;
-    margin-top: var(--z-ds-space-l);
-  }
-  
-  .newswire-title {
-    font-size: var(--z-ds-fontsize-20);
-  }
-  
-  .newswire-timestamp {
-    font-size: var(--z-ds-fontsize-12);
-  }
-  
-  .newswire-topic,
-  .newswire-description {
-    font-size: var(--z-ds-fontsize-14);
   }
 }
 

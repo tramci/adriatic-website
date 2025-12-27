@@ -166,28 +166,44 @@
 
     // Dock bottom nav when it reaches the sticky navbar
     if (homeBottomNav) {
-      const stickyNavbarHeight = 48; // Height of sticky navbar in pixels
+      const stickyNavbarHeight = 48;
+      let isDocked = false;
+      // Store the nav's original document position (distance from top of document)
+      // We need to wait until layout is stable to get this
+      let navDocumentTop = null;
 
-      const bottomNavObserver = new IntersectionObserver(
-        ([entry]) => {
-          // Only dock if sticky navbar is visible
-          if (!stickyNavbar.classList.contains('is-visible')) return;
-
-          // Dock when top of bottom nav reaches the bottom of sticky navbar
-          if (!entry.isIntersecting) {
-            homeBottomNav.classList.add('is-docked');
-          } else {
+      function checkBottomNavDocking() {
+        // Only dock if sticky navbar is visible
+        if (!stickyNavbar.classList.contains('is-visible')) {
+          if (isDocked) {
             homeBottomNav.classList.remove('is-docked');
+            isDocked = false;
           }
-        },
-        {
-          root: null,
-          threshold: 0,
-          rootMargin: `-${stickyNavbarHeight}px 0px 0px 0px`
+          return;
         }
-      );
 
-      bottomNavObserver.observe(homeBottomNav);
+        if (!isDocked) {
+          // When not docked, check real-time position
+          const navRect = homeBottomNav.getBoundingClientRect();
+          // Dock when top of nav reaches bottom of sticky navbar
+          if (navRect.top <= stickyNavbarHeight) {
+            // Save the document position before docking
+            navDocumentTop = navRect.top + window.scrollY;
+            homeBottomNav.classList.add('is-docked');
+            isDocked = true;
+          }
+        } else {
+          // When docked, check if we've scrolled back up past the original position
+          // Undock threshold: when scroll position is less than where nav originally was minus navbar height
+          const undockThreshold = navDocumentTop - stickyNavbarHeight;
+          if (window.scrollY < undockThreshold) {
+            homeBottomNav.classList.remove('is-docked');
+            isDocked = false;
+          }
+        }
+      }
+
+      window.addEventListener('scroll', checkBottomNavDocking, { passive: true });
     }
   }
 
