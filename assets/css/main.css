@@ -472,7 +472,7 @@ html {
 .home-bottom-nav {
   background-color: #faf0f0;
   border-top: 1px solid #e8e0e0;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   flex-shrink: 0;
 }
 
@@ -573,7 +573,7 @@ html {
 
 .hero-headline {
   font-family: 'Lado', Arial Narrow, sans-serif;
-  font-size: 4rem;
+  font-size: 3.25rem;
   font-weight: 300;
   color: #1a1a1a;
   line-height: 1.1;
@@ -588,7 +588,7 @@ html {
 .hero-summary {
   font-family: 'Adriatic22', Georgia, serif;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #1a1a1a;
   line-height: 1.5;
   margin: 0 0 var(--z-ds-space-m);
