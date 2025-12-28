@@ -210,7 +210,9 @@
 
     // Dock bottom nav when it reaches the sticky navbar
     if (homeBottomNav) {
-      const stickyNavbarHeight = 48;
+      const stickyNavbarHeight = stickyNavbar.offsetHeight;
+      // Set CSS custom property for docked positioning
+      document.documentElement.style.setProperty('--sticky-navbar-height', stickyNavbarHeight + 'px');
       let isDocked = false;
       // Store the nav's original document position (distance from top of document)
       // We need to wait until layout is stable to get this
