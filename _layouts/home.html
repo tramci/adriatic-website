@@ -74,59 +74,40 @@ layout: default
       </a>
     </div>
   </section>
-
-  <!-- BOTTOM NAV: sits at viewport bottom on load -->
-  <nav class="home-bottom-nav">
-    <div class="home-bottom-nav-container">
-      <a href="#" class="home-nav-link">Latest</a>
-      <a href="#" class="home-nav-link">Culture</a>
-      <a href="#" class="home-nav-link">Politics</a>
-      <a href="#" class="home-nav-link">Business</a>
-      <a href="#" class="home-nav-link">Magazine</a>
-    </div>
-  </nav>
 </div>
 {% endif %}
 
 <!-- Container for everything below hero -->
 <div class="container">
 
-<!-- FIRST TWO ARTICLES -->
-<section class="articles-section">
-  <div class="articles-grid">
+<!-- THREE ARTICLES ROW -->
+<section class="articles-row-section">
+  <div class="articles-row">
     {% assign recent_posts = site.posts | where_exp: "post", "post.url != featured_post.url" %}
-    {% for post in recent_posts limit: 2 %}
-      <article class="article-item">
-        <a href="{{ post.url | relative_url }}" class="article-image-link">
+    {% for post in recent_posts limit: 3 %}
+      <article class="article-card">
+        <a href="{{ post.url | relative_url }}" class="article-card-image-link">
           {% if post.image %}
             <img
               src="{{ post.image | relative_url }}"
               alt="{{ post.title }}"
-              class="article-thumbnail"
+              class="article-card-thumbnail"
               loading="lazy"
-              decoding="async"
-              sizes="(max-width: 48em) 100vw, 400px">
+              decoding="async">
           {% else %}
             <img
-              src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format"
-              srcset="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop&auto=format 240w,
-                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format 400w,
-                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=600&h=300&fit=crop&auto=format 600w"
-              sizes="(max-width: 48em) 100vw, 400px"
+              src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop&auto=format"
               alt="{{ post.title }}"
-              class="article-thumbnail"
+              class="article-card-thumbnail"
               loading="lazy"
               decoding="async">
           {% endif %}
         </a>
-        <div class="article-content">
-          <span class="category-tag {{ post.category }}">
-            {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
-          </span>
-          <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
-          <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+        <div class="article-card-content">
+          <h3><a href="{{ post.url | relative_url }}" class="article-card-title-link">{{ post.title }}</a></h3>
+          <p class="article-card-lede">{{ post.excerpt | strip_html }}</p>
           {% if post.author %}
-            <span class="article-author">By {{ post.author }}</span>
+            <span class="article-card-author">By {{ post.author }}</span>
           {% endif %}
         </div>
       </article>

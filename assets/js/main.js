@@ -133,14 +133,58 @@
   }
 
   // =================================================================
-  // STICKY NAVBAR - Appears when scrolling past masthead on homepage
+  // NAVBAR BEHAVIOR - Homepage vs other pages
   // =================================================================
 
   const stickyNavbar = document.getElementById('sticky-navbar');
   const mastheadEl = document.querySelector('.masthead');
   const homeBottomNav = document.querySelector('.home-bottom-nav');
+  const isHomepage = body.classList.contains('is-homepage');
 
-  if (stickyNavbar && mastheadEl) {
+  // Non-homepage pages: show navbar immediately, hide masthead
+  if (!isHomepage && stickyNavbar) {
+    stickyNavbar.classList.add('is-visible');
+    if (mastheadEl) {
+      mastheadEl.style.display = 'none';
+    }
+    if (homeBottomNav) {
+      homeBottomNav.classList.add('is-docked');
+
+      // Hide bottom nav when scrolling down, show when scrolling up
+      let lastScrollY = window.scrollY;
+      let isBottomNavHidden = false;
+
+      function handleBottomNavScroll() {
+        const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY;
+
+        // Only hide/show after scrolling a bit (threshold of 10px)
+        if (Math.abs(scrollDelta) < 10) return;
+
+        if (scrollDelta > 0 && !isBottomNavHidden && currentScrollY > 100) {
+          // Scrolling down - hide bottom nav
+          homeBottomNav.classList.add('is-hidden');
+          isBottomNavHidden = true;
+        } else if (scrollDelta < 0 && isBottomNavHidden) {
+          // Scrolling up - show bottom nav
+          homeBottomNav.classList.remove('is-hidden');
+          isBottomNavHidden = false;
+        }
+
+        lastScrollY = currentScrollY;
+      }
+
+      window.addEventListener('scroll', handleBottomNavScroll, { passive: true });
+    }
+  }
+
+  // Homepage: move bottom nav inside above-fold wrapper so it can be positioned at bottom
+  if (isHomepage && homeBottomNav && aboveFold) {
+    aboveFold.appendChild(homeBottomNav);
+  }
+
+  // Homepage: navbar appears when scrolling past masthead
+  if (isHomepage && stickyNavbar && mastheadEl) {
     // Use IntersectionObserver to detect when masthead leaves viewport
     const mastheadObserver = new IntersectionObserver(
       ([entry]) => {
