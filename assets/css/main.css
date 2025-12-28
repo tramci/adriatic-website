@@ -607,21 +607,21 @@ body:not(.is-homepage) .home-nav-link:hover {
 }
 
 .hero-text {
-  padding: var(--z-ds-space-xxl) 1.5rem;
+  padding: clamp(2rem, 1rem + 3vw, 4rem) clamp(1rem, 0.5rem + 2vw, 2.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   text-align: left;
   color: #1a1a1a;
-  max-width: 520px;
+  max-width: clamp(400px, 300px + 15vw, 600px);
   margin-left: auto;
   margin-right: auto;
 }
 
 .hero-text .category-tag {
   font-family: 'SajJY', Verdana, sans-serif;
-  font-size: var(--z-ds-fontsize-14);
+  font-size: clamp(0.8rem, 0.5rem + 0.5vw, 1.2rem);
   font-weight: 700;
   color: #bd2d2d;
   margin-bottom: var(--z-ds-space-xxxs);
@@ -630,7 +630,7 @@ body:not(.is-homepage) .home-nav-link:hover {
 
 .hero-headline {
   font-family: 'Lado', Arial Narrow, sans-serif;
-  font-size: 5rem;
+  font-size: clamp(3.5rem, 2rem + 3vw, 6rem);
   font-weight: 300;
   color: #1a1a1a;
   line-height: 0.85;
@@ -645,7 +645,7 @@ body:not(.is-homepage) .home-nav-link:hover {
 .hero-summary {
   font-family: 'Adriatic22', Georgia, serif;
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 0.75rem + 0.4vw, 1.3rem);
   color: #1a1a1a;
   line-height: 1.5;
   margin: 0 0 var(--z-ds-space-s);
@@ -654,7 +654,7 @@ body:not(.is-homepage) .home-nav-link:hover {
 .hero-author {
   font-family: 'SajJY', Verdana, sans-serif;
   color: #888888;
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 0.5rem + 0.35vw, 1rem);
   font-weight: 700;
   font-style: normal;
 }
