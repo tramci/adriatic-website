@@ -761,17 +761,19 @@ body:not(.is-homepage) .home-nav-link:hover {
 }
 
 .article-card-content h3 {
-  font-family: 'Adriatic22', Arial, sans-serif;
-  font-size: var(--z-ds-fontsize-24);
-  font-weight: 700;
+  font-family: 'Lado', Arial Narrow, sans-serif;
+  font-size: clamp(1.5rem, 1rem + 1vw, 2.25rem);
+  font-weight: 300;
   color: var(--z-ds-color-text-100);
-  line-height: 1.2;
+  line-height: 1;
+  text-transform: uppercase;
   margin: 0 0 var(--z-ds-space-xs);
 }
 
 .article-card-title-link {
   color: inherit;
   text-decoration: none;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
@@ -782,18 +784,19 @@ body:not(.is-homepage) .home-nav-link:hover {
 .article-card-lede {
   font-family: 'Adriatic22', Georgia, serif;
   font-weight: 400;
-  color: #555555;
-  font-size: 1rem;
+  color: #1a1a1a;
+  font-size: clamp(0.9rem, 0.7rem + 0.3vw, 1.1rem);
   line-height: 1.4;
   margin-bottom: var(--z-ds-space-s);
 }
 
 .article-card-author {
   font-family: 'SajJY', Verdana, sans-serif;
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 0.5rem + 0.35vw, 1rem);
   font-style: normal;
   font-weight: 700;
   color: #888888;
+  text-transform: uppercase;
   display: block;
 }
 
@@ -1067,77 +1070,97 @@ body:not(.is-homepage) .home-nav-link:hover {
 }
 
 /* =======================================================================
-   POST PAGE STYLES — CENTERED LAYOUT (Content Above Image)
+   POST PAGE STYLES — DARK HERO LAYOUT
    ======================================================================= */
 
-/* Post Container - Centered */
-.post-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--z-ds-space-xl) var(--z-ds-space-s);
+/* Hero Section - Dark background */
+.post-hero-section {
+  background-color: #1a1a1a;
+  width: 100%;
+  padding: calc(var(--sticky-navbar-height, 48px) + clamp(2rem, 1rem + 3vw, 4rem)) 0 0;
 }
 
-/* Post Header - Content before image */
+/* Post Header - Single column with offset lede */
 .post-header {
-  max-width: 680px;
-  margin: 0 auto var(--z-ds-space-xl);
-  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 2vw, 3rem);
 }
 
 /* Post Category Tag */
 .post-category .category-tag {
-  font-family: 'Adriatic22', Arial, sans-serif;
-  font-size: var(--z-ds-fontsize-24);
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: clamp(0.7rem, 0.5rem + 0.3vw, 0.9rem);
   font-weight: 700;
   color: #bd2d2d;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-/* Post Date */
-.post-date {
-  font-family: 'SajJY', Verdana, sans-serif;
-  font-size: 1.5rem;
-  color: var(--z-ds-color-text-100);
-  margin-bottom: 0.5rem;
-  font-style: normal;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
   display: block;
 }
 
 /* Post Title */
 .post-title {
   font-family: 'Lado', Arial Narrow, sans-serif;
-  font-size: 5.5rem;
-  font-weight: 300;
-  color: var(--z-ds-color-text-100);
-  line-height: 1;
-  margin: 0 0 var(--z-ds-space-xs);
+  font-size: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.05;
+  margin: 0 0 1.5rem;
   text-transform: uppercase;
 }
 
-/* Post Author */
-.post-author-name {
-  font-family: 'Adriatic22', Arial, sans-serif;
-  font-size: 1.75rem;
-  color: var(--z-ds-color-text-100);
-  margin-bottom: 0;
+/* Share and Lede row */
+.post-lede-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-.by-text,
-.author-name {
+/* Share Icons */
+.post-share-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.share-icon {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-icon:hover {
+  color: #ffffff;
+}
+
+.share-divider {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Post Lede - Right of icons, italic */
+.post-lede {
+  font-family: 'Adriatic22', 'Source Serif Pro', Georgia, serif;
+  font-size: clamp(1.1rem, 0.9rem + 0.5vw, 1.4rem);
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.5;
   font-weight: 400;
+  text-align: left;
+  margin: 0;
 }
 
-.author-role {
-  font-weight: 400;
-}
-
-/* Hero Image - After header, full width */
+/* Hero Image - Full width within dark section */
 .post-hero-image {
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto var(--z-ds-space-xl);
+  margin: clamp(2rem, 3vw, 4rem) auto 0;
+  padding: 0 clamp(1rem, 2vw, 3rem);
 }
 
 .post-hero-image img {
@@ -1148,32 +1171,56 @@ body:not(.is-homepage) .home-nav-link:hover {
   display: block;
 }
 
-/* Image Caption - Below image */
-.post-image-caption {
-  max-width: 750px;
-  margin: var(--z-ds-space-s) auto 0;
+/* Image Caption - Below image, in dark section */
+.post-hero-section .post-image-caption {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem clamp(1rem, 2vw, 3rem) 1rem;
   font-family: 'SajJY', Verdana, sans-serif;
-  color: var(--z-ds-color-text-70);
-  font-size: var(--z-ds-fontsize-14);
-  text-align: center;
+  font-size: clamp(0.85rem, 0.7rem + 0.25vw, 1rem);
+  font-weight: 400;
+  text-align: right;
+  color: #ffffff;
+}
+
+.post-hero-section .post-image-caption .credit {
+  color: #bd2d2d;
+}
+
+/* Byline Section - Below hero, light background */
+.post-byline-section {
+  background-color: #faf0f0;
+  width: 100%;
+  padding-top: clamp(1.5rem, 2vw, 2.5rem);
+  padding-bottom: clamp(0.75rem, 1vw, 1rem);
+}
+
+.post-byline-inner {
+  max-width: 680px;
+  margin: 0 auto;
   padding: 0 var(--z-ds-space-s);
 }
 
-.post-image-caption .credit {
-  color: #A9A9A9;
-  opacity: 1;
+.post-byline {
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: clamp(0.85rem, 0.7rem + 0.25vw, 1rem);
+  font-weight: 700;
+  color: #bd2d2d;
+  margin-bottom: 0.25rem;
 }
 
-/* Post Lede - Below title, italic and grey */
-.post-lede {
-  font-family: 'Adriatic22', 'Source Serif Pro', Georgia, serif;
-  font-size: 1.75rem;
-  font-style: italic;
-  color: #777777;
-  line-height: 1.4;
+.post-date {
+  font-family: 'SajJY', Verdana, sans-serif;
+  font-size: clamp(0.85rem, 0.7rem + 0.25vw, 1rem);
   font-weight: 400;
-  text-align: left;
-  margin-top: 1rem;
+  color: #666666;
+}
+
+/* Post Container - Article content on light background */
+.post-container {
+  width: 100%;
+  padding: var(--z-ds-space-m) var(--z-ds-space-s) var(--z-ds-space-xl);
+  background-color: #faf0f0;
 }
 
 /* Author sidebar + Content wrapper */
@@ -1373,155 +1420,8 @@ body:not(.is-homepage) .home-nav-link:hover {
 }
 
 /* =======================================================================
-   RESPONSIVE — Post Page Centered Layout
+   RESPONSIVE — Post Page (placeholder for future mobile optimization)
    ======================================================================= */
-@media (max-width: 48em) {
-  .post-container {
-    padding: var(--z-ds-space-l) 0;
-  }
-  
-  .post-header {
-    max-width: 100%;
-    margin-bottom: var(--z-ds-space-l);
-    padding: 0 var(--z-ds-space-s);
-  }
-  
-  .post-title {
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  
-  .post-date {
-    font-size: 0.9rem;
-  }
-  
-  .post-author-name {
-    font-size: 1rem;
-  }
-  
-  .post-hero-image {
-    margin-bottom: var(--z-ds-space-l);
-  }
-  
-  .post-hero-image img {
-    max-height: 400px;
-  }
-  
-  .post-lede-wrapper {
-    margin-bottom: var(--z-ds-space-l);
-  }
-  
-  .post-lede {
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }
-  
-  .post-content {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    max-width: 100%;
-  }
-  
-  .post-content h1 {
-    font-size: 1.75rem;
-  }
-  
-  .post-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .post-content h3 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Tablet optimization */
-@media (min-width: 48em) and (max-width: 64em) {
-  .post-title {
-    font-size: 3rem;
-  }
-}
-
-/* =======================================================================
-   RESPONSIVE — Post Page Centered Layout
-   ======================================================================= */
-@media (max-width: 48em) {
-  .post-hero-image img {
-    height: 40vh;
-    max-height: 400px;
-  }
-  
-  .post-container {
-    padding: 0 var(--z-ds-space-s);
-  }
-  
-  .post-header {
-    max-width: 100%;
-    margin-bottom: var(--z-ds-space-l);
-  }
-  
-  .post-title {
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  
-  .post-lede {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-  
-  .post-date {
-    font-size: 0.9rem;
-  }
-  
-  .post-author-name {
-    font-size: 1rem;
-  }
-  
-  .post-content {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    max-width: 100%;
-  }
-  
-  .post-content h1 {
-    font-size: 1.75rem;
-  }
-  
-  .post-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .post-content h3 {
-    font-size: 1.25rem;
-  }
-  
-  .post-divider {
-    max-width: 100%;
-    margin-bottom: var(--z-ds-space-l);
-  }
-  
-  .post-image-caption {
-    max-width: 100%;
-  }
-}
-
-/* Tablet optimization */
-@media (min-width: 48em) and (max-width: 64em) {
-  .post-hero-image img {
-    height: 50vh;
-  }
-  
-  .post-header {
-    max-width: 680px;
-  }
-  
-  .post-title {
-    font-size: 3rem;
-  }
-}
 
 /* =======================================================================
    RESPONSIVE — Homepage
@@ -1634,84 +1534,6 @@ body:not(.is-homepage) .home-nav-link:hover {
   }
 }
 
-/* =======================================================================
-   RESPONSIVE — Post Page
-   ======================================================================= */
-@media (max-width: 48em) {
-  .post-layout {
-    grid-template-columns: 1fr;
-    gap: var(--z-ds-space-l);
-    padding: 0;
-  }
-  
-  .post-left,
-  .post-right {
-    padding: 0 12px;
-  }
-  
-  .post-title,
-  .post-meta,
-  .post-category {
-    text-align: center;
-  }
-  
-  .post-title {
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  
-  .post-lede {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-  
-  .post-date,
-  .post-author-name {
-    font-size: 0.8rem;
-  }
-  
-  .post-date {
-    margin-bottom: 0.25rem;
-  }
-  
-  .post-author-name {
-    margin-bottom: 1.5rem;
-  }
-  
-  .post-content {
-    font-size: 1.25rem;
-    line-height: 1.6;
-  }
-  
-  .post-content h1 {
-    font-size: 1.75rem;
-  }
-  
-  .post-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .post-content h3 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Tablet */
-@media (min-width: 48em) and (max-width: 64em) {
-  .post-layout {
-    grid-template-columns: minmax(0, 620px) minmax(360px, 440px);
-    gap: var(--z-ds-space-l);
-  }
-}
-
-/* Sticky image on tall screens */
-@media (min-height: 720px) and (min-width: 64em) {
-  .post-right {
-    position: sticky;
-    top: calc(72px + 16px);
-  }
-}
 
 /* =======================================================================
    CATEGORY PAGE
@@ -1946,87 +1768,6 @@ body:not(.is-homepage) .home-nav-link:hover {
     font-size: 0.8rem;
   }
 
-  /* Post layout responsive */
-  .post-layout {
-    grid-template-columns: 1fr;
-    gap: var(--z-ds-space-l);
-    padding: 0;
-  }
-  
-  .post-left,
-  .post-right,
-  .post-navigation {
-    padding: 0 12px;
-  }
-  
-  .post-title,
-  .post-meta,
-  .post-category {
-    text-align: center;
-  }
-  
-  .post-container {
-    padding: 0;
-  }
-  
-  .post-category,
-  .post-title,
-  .post-meta,
-  .post-content {
-    padding: 0 12px;
-  }
-  
-  .post-title {
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  
-  .post-lede {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-  
-  .post-date,
-  .post-author-name {
-    font-size: 0.8rem;
-  }
-  
-  .post-date {
-    margin-bottom: 0.25rem;
-  }
-  
-  .post-author-name {
-    margin-bottom: 1.5rem;
-  }
-  
-  .post-image {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-bottom: var(--z-ds-space-l);
-  }
-  
-  .post-content {
-    font-size: 1.25rem;
-    line-height: 1.6;
-  }
-  
-  .post-content h1 {
-    font-size: 1.75rem;
-  }
-  
-  .post-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .post-content h3 {
-    font-size: 1.25rem;
-  }
-  
-  .post-content p {
-    margin-bottom: 1.25rem;
-  }
-  
   /* Category page responsive */
   .post-card {
     grid-template-columns: 1fr;
@@ -2048,16 +1789,6 @@ body:not(.is-homepage) .home-nav-link:hover {
 
 /* Tablet optimization */
 @media (min-width: 48em) and (max-width: 64em) {
-  /* Post layout */
-  .post-layout {
-    grid-template-columns: minmax(0, 620px) minmax(360px, 440px);
-    gap: var(--z-ds-space-l);
-  }
-  
-  .post-container {
-    padding: 0 var(--z-ds-space-m);
-  }
-  
   /* Home page */
   .hero-section {
     max-width: 800px;
@@ -2093,13 +1824,6 @@ body:not(.is-homepage) .home-nav-link:hover {
   }
 }
 
-/* Sticky image on tall screens */
-@media (min-height: 720px) and (min-width: 64em) {
-  .post-right {
-    position: sticky;
-    top: calc(72px + 16px);
-  }
-}
 
 /* =======================================================================
    SEARCH PAGE

@@ -19,7 +19,7 @@
   <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css"></noscript>
 </head>
-<body{% if page.url == "/" %} class="is-homepage"{% endif %}>
+<body{% if page.url == "/" %} class="is-homepage"{% elsif page.layout == "post" %} class="article-page"{% endif %}>
 
   <!-- STICKY NAVBAR (appears when scrolling past masthead) -->
   <nav class="sticky-navbar" id="sticky-navbar">
@@ -127,7 +127,7 @@
 
 <!-- MAIN CONTENT -->
 <main class="main-content">
-  {% if page.url == "/" %}
+  {% if page.url == "/" or page.layout == "post" %}
     {{ content }}
   {% else %}
     <div class="container">
