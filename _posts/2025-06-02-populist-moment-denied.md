@@ -2,6 +2,7 @@
 layout: post
 title: Populist moment denied
 date: 2025-06-04T00:00:00.000Z
+category: politics
 category_display: Trump rebuked
 author: Maja Dragović
 author_slug: maja-dragovic

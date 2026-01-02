@@ -2,7 +2,8 @@
 layout: post
 title: US strikes Iran's nuclear facilities
 date: 2025-06-22T00:00:00.000Z
-category: Crisis in Persia
+category: politics
+category_display: Crisis in Persia
 author: Andraž Tavčar
 author_slug: andraz-tavcar
 author_role: Researcher

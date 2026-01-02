@@ -2,44 +2,82 @@
 layout: default
 ---
 
-<!-- Category Header -->
-<header class="category-header">
-    <h1 class="category-title">{{ page.category }}</h1>
-    {% if page.description %}
-        <p class="category-description">{{ page.description }}</p>
-    {% endif %}
-</header>
+{% assign posts_per_page = 10 %}
+{% assign current_page = page.pagination_page | default: 1 %}
+{% assign category_slug = page.category_slug %}
+{% assign category_title = page.category_title %}
+{% assign category_description = page.category_description %}
 
-<!-- Category Posts -->
-<section class="category-posts">
-    {% assign category_posts = site.posts | where: "category", page.category %}
-    
-    {% if category_posts.size > 0 %}
-        <div class="posts-grid">
-            {% for post in category_posts %}
-            <article class="post-card">
-                {% if post.image %}
-                    <img src="{{ post.image }}" alt="{{ post.title }}" class="post-card-image">
-                {% else %}
-                    <img src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=300&h=200&fit=crop" alt="{{ post.title }}" class="post-card-image">
-                {% endif %}
-                
-                <div class="post-card-content">
-                    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-                    <p class="post-card-excerpt">{{ post.excerpt | strip_html }}</p>
-                    <div class="post-card-meta">
-                        <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%d %B, %Y" }}</time>
-                        {% if post.author %}
-                            <span>{{ post.author }}</span>
-                        {% endif %}
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="no-posts">
-            <p>No {{ page.category }} articles published yet.</p>
-        </div>
+{% if category_slug == "latest" %}
+  {% assign all_posts = site.posts %}
+{% else %}
+  {% assign all_posts = site.posts | where: "category", category_slug %}
+{% endif %}
+
+{% assign total_posts = all_posts.size %}
+{% assign total_pages = total_posts | divided_by: posts_per_page %}
+{% assign remainder = total_posts | modulo: posts_per_page %}
+{% if remainder > 0 %}{% assign total_pages = total_pages | plus: 1 %}{% endif %}
+{% if total_pages < 1 %}{% assign total_pages = 1 %}{% endif %}
+
+{% assign offset = current_page | minus: 1 | times: posts_per_page %}
+
+<div class="category-page">
+  <header class="category-header">
+    <h1 class="category-title">{{ category_title }}</h1>
+    <p class="category-description">{{ category_description }}</p>
+  </header>
+
+  <div class="category-posts">
+    <div class="posts-grid">
+      {% for post in all_posts limit: posts_per_page offset: offset %}
+        <article class="post-card">
+          {% if post.image %}
+          <a href="{{ post.url | relative_url }}" class="post-card-image-link">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image" loading="lazy">
+          </a>
+          {% endif %}
+          <div class="post-card-content">
+            <span class="category-tag">{% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}</span>
+            <h2><a href="{{ post.url | relative_url }}" class="post-card-title-link">{{ post.title }}</a></h2>
+            <p class="post-card-excerpt">{{ post.excerpt | strip_html }}</p>
+            <div class="post-card-meta">
+              <span class="post-card-date">{{ post.date | date: "%-d %B %Y" }}</span>
+              {% if post.author %}
+              <span class="post-card-author">By {{ post.author }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+
+      {% if total_posts == 0 %}
+      <p class="no-posts">No articles in this category yet.</p>
+      {% endif %}
+    </div>
+
+    {% if total_pages > 1 %}
+    <nav class="category-pagination">
+      <div class="pagination-nav">
+        {% if current_page > 1 %}
+          {% if current_page == 2 %}
+            <a href="{{ site.baseurl }}/category/{{ category_slug }}/" class="pagination-prev">← Previous</a>
+          {% else %}
+            <a href="{{ site.baseurl }}/category/{{ category_slug }}/page/{{ current_page | minus: 1 }}/" class="pagination-prev">← Previous</a>
+          {% endif %}
+        {% else %}
+          <span class="pagination-prev disabled">← Previous</span>
+        {% endif %}
+
+        <span class="pagination-info">Page {{ current_page }} of {{ total_pages }}</span>
+
+        {% if current_page < total_pages %}
+          <a href="{{ site.baseurl }}/category/{{ category_slug }}/page/{{ current_page | plus: 1 }}/" class="pagination-next">Next →</a>
+        {% else %}
+          <span class="pagination-next disabled">Next →</span>
+        {% endif %}
+      </div>
+    </nav>
     {% endif %}
-</section>
+  </div>
+</div>

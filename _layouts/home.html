@@ -172,6 +172,9 @@ layout: default
     </div>
 
     <!-- Magazine sidebar -->
+    <!-- PDF link: Set current_issue.link in _data/current_issue.yml to point to PDF
+         e.g., link: "/assets/pdfs/adriatic-2026.pdf" for local PDFs
+         or link: "https://example.com/adriatic-2026.pdf" for external hosting -->
     {% if site.data.current_issue %}
     <aside class="magazine-sidebar">
       <a href="{{ site.data.current_issue.link | relative_url }}" class="magazine-sidebar-cover-link">
@@ -182,7 +185,9 @@ layout: default
           loading="lazy"
           decoding="async">
       </a>
-      <h2 class="magazine-sidebar-title">{{ site.data.current_issue.title }}</h2>
+      <h2 class="magazine-sidebar-title">
+        <a href="{{ site.data.current_issue.link | relative_url }}" class="magazine-sidebar-title-link">{{ site.data.current_issue.title }}</a>
+      </h2>
       {% if site.data.current_issue.description %}
       <p class="magazine-sidebar-description">{{ site.data.current_issue.description }}</p>
       {% endif %}

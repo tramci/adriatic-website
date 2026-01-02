@@ -2,7 +2,7 @@
 layout: post
 title: The long march to Europe
 date: 2025-06-04T00:00:00.000Z
-category: power
+category: politics
 category_display: Same as the old
 author: Andraž Tavčar
 author_slug: andraz-tavcar
