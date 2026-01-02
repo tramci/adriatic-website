@@ -1279,11 +1279,11 @@ body:not(.is-homepage) .home-nav-link:hover {
 
 .newsletter-button {
   font-family: 'SajJY', Verdana, sans-serif;
-  font-size: clamp(0.85rem, 0.8rem + 0.1vw, 1rem);
+  font-size: clamp(0.7rem, 0.4rem + 0.35vw, 0.9rem);
   font-weight: 700;
   color: #ffffff;
   background-color: #1e3a5f;
-  padding: 0.75rem 1.5rem;
+  padding: clamp(4px, 0.3vw, 6px) clamp(10px, 0.6vw + 4px, 16px);
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.2s ease;
@@ -2137,6 +2137,10 @@ body:not(.is-homepage) .home-nav-link:hover {
   padding: var(--z-ds-space-l) 0;
   border-bottom: 1px solid #e0e0e0;
   align-items: start;
+}
+
+.post-card.no-image {
+  display: block;
 }
 
 .post-card:first-child {
