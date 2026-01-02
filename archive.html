@@ -1,0 +1,25 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+---
+
+<div class="archive-page">
+  <h1 class="archive-title">All Articles</h1>
+
+  <div class="archive-list">
+    {% assign all_posts = site.posts %}
+    {% for post in all_posts %}
+      <article class="archive-item">
+        <span class="archive-item-date">{{ post.date | date: "%-d %B %Y" }}</span>
+        <div class="archive-item-content">
+          <span class="category-tag {{ post.category }}">
+            {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+          </span>
+          <h3><a href="{{ post.url | relative_url }}" class="archive-item-link">{{ post.title }}</a></h3>
+          <p class="archive-item-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</div>

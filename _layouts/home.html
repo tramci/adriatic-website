@@ -82,6 +82,10 @@ layout: default
 
 <!-- THREE ARTICLES ROW -->
 <section class="articles-row-section">
+  <div class="articles-row-header">
+    <h2 class="articles-row-title">News you can use.</h2>
+    <p class="articles-row-subtitle">And probably quote at lunch.</p>
+  </div>
   <div class="articles-row">
     {% assign recent_posts = site.posts | where_exp: "post", "post.url != featured_post.url" %}
     {% for post in recent_posts limit: 3 %}
@@ -107,7 +111,7 @@ layout: default
           <h3><a href="{{ post.url | relative_url }}" class="article-card-title-link">{{ post.title }}</a></h3>
           <p class="article-card-lede">{{ post.excerpt | strip_html }}</p>
           {% if post.author %}
-            <span class="article-card-author">By {{ post.author }}</span>
+            <span class="article-card-author">By <span class="article-card-author-name">{{ post.author }}</span></span>
           {% endif %}
         </div>
       </article>
@@ -121,64 +125,72 @@ layout: default
     <div class="newsletter-image">
       <img
         src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=400&fit=crop&auto=format"
-        srcset="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300&h=300&fit=crop&auto=format 300w,
-                https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=400&fit=crop&auto=format 400w,
-                https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=600&fit=crop&auto=format 600w"
-        sizes="(max-width: 48em) 200px, 300px"
         alt="Newsletter"
         loading="lazy"
         decoding="async">
     </div>
     <div class="newsletter-content">
-      <p class="newsletter-eyebrow">Our newsletter</p>
-      <a href="/subscribe" class="newsletter-title-link">
-        <h2 class="newsletter-title">A slower take on a fast world.</h2>
-      </a>
+      <h2 class="newsletter-title">A slower take on a fast world.</h2>
       <p class="newsletter-description">Essays, weekenders, and dispatches from across the region. In your inbox every other Saturday.</p>
-      <a href="/subscribe" class="newsletter-link">Subscribe →</a>
+<a href="/subscribe" class="newsletter-button">Subscribe</a>
     </div>
   </div>
 </section>
 
-<!-- REMAINING ARTICLES -->
-<section class="articles-section">
-  <div class="articles-grid">
-    {% for post in recent_posts offset: 2 limit: 4 %}
-      <article class="article-item">
-        <a href="{{ post.url | relative_url }}" class="article-image-link">
-          {% if post.image %}
-            <img
-              src="{{ post.image | relative_url }}"
-              alt="{{ post.title }}"
-              class="article-thumbnail"
-              loading="lazy"
-              decoding="async"
-              sizes="(max-width: 48em) 100vw, 400px">
-          {% else %}
-            <img
-              src="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format"
-              srcset="https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=240&h=120&fit=crop&auto=format 240w,
-                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=400&h=200&fit=crop&auto=format 400w,
-                      https://images.unsplash.com/photo-{{ forloop.index | plus: 1541872705 }}?w=600&h=300&fit=crop&auto=format 600w"
-              sizes="(max-width: 48em) 100vw, 400px"
-              alt="{{ post.title }}"
-              class="article-thumbnail"
-              loading="lazy"
-              decoding="async">
-          {% endif %}
-        </a>
-        <div class="article-content">
-          <span class="category-tag {{ post.category }}">
-            {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
-          </span>
-          <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
-          <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
-          {% if post.author %}
-            <span class="article-author">By {{ post.author }}</span>
-          {% endif %}
-        </div>
-      </article>
-    {% endfor %}
+<!-- REMAINING ARTICLES WITH MAGAZINE SIDEBAR -->
+<section class="articles-with-sidebar">
+  <div class="articles-sidebar-container">
+    <!-- Articles column - text list -->
+    <div class="articles-column">
+      {% assign articles_per_page = 5 %}
+      {% assign remaining_posts = recent_posts | slice: 2, 1000 %}
+      {% assign total_remaining = remaining_posts.size %}
+      {% assign total_pages = total_remaining | divided_by: articles_per_page %}
+      {% assign remainder = total_remaining | modulo: articles_per_page %}
+      {% if remainder > 0 %}{% assign total_pages = total_pages | plus: 1 %}{% endif %}
+      {% if total_pages < 1 %}{% assign total_pages = 1 %}{% endif %}
+
+      {% for post in remaining_posts limit: articles_per_page %}
+        <article class="article-row">
+          <span class="article-row-date">{{ post.date | date: "%-d %B %Y" }}</span>
+          <div class="article-row-content">
+            <span class="category-tag {{ post.category }}">
+              {% if post.category_display %}{{ post.category_display }}{% else %}{{ post.category }}{% endif %}
+            </span>
+            <h3><a href="{{ post.url | relative_url }}" class="article-title-link">{{ post.title }}</a></h3>
+            <p class="article-excerpt">{{ post.excerpt | strip_html }}</p>
+          </div>
+        </article>
+      {% endfor %}
+
+      {% if total_pages > 1 %}
+      <nav class="articles-pagination">
+        <span class="pagination-info">Page 1 of {{ total_pages }}</span>
+        <a href="{{ '/archive/' | relative_url }}" class="pagination-link">View all articles →</a>
+      </nav>
+      {% endif %}
+    </div>
+
+    <!-- Magazine sidebar -->
+    {% if site.data.current_issue %}
+    <aside class="magazine-sidebar">
+      <a href="{{ site.data.current_issue.link | relative_url }}" class="magazine-sidebar-cover-link">
+        <img
+          src="{{ site.data.current_issue.image | relative_url }}"
+          alt="{{ site.data.current_issue.title }}"
+          class="magazine-sidebar-cover"
+          loading="lazy"
+          decoding="async">
+      </a>
+      <h2 class="magazine-sidebar-title">{{ site.data.current_issue.title }}</h2>
+      {% if site.data.current_issue.description %}
+      <p class="magazine-sidebar-description">{{ site.data.current_issue.description }}</p>
+      {% endif %}
+      <div class="magazine-sidebar-links">
+        <a href="{{ '/issues/' | relative_url }}">See all issues</a>
+      </div>
+    </aside>
+    {% endif %}
   </div>
 </section>
 

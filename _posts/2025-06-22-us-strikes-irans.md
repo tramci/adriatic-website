@@ -4,9 +4,12 @@ title: US strikes Iran's nuclear facilities
 date: 2025-06-22T00:00:00.000Z
 category: Crisis in Persia
 author: Andraž Tavčar
+author_slug: andraz-tavcar
 author_role: Researcher
 author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/trump-situation.jpg
+image_caption: Description of the image.
+image_credit: Photo by John Doe
 excerpt: >-
   The United States launched devastating airstrikes against three of Iran's most
   sensitive nuclear sites on Sunday, marking the most significant American

@@ -5,9 +5,12 @@ date: 2025-06-04T00:00:00.000Z
 category: power
 category_display: Same as the old
 author: Andraž Tavčar
+author_slug: andraz-tavcar
 author_role: Researcher
 author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/long-march-to-europe.png
+image_caption: Description of the image.
+image_credit: Photo by John Doe
 excerpt: >-
   Albania's ruling Socialist Party has secured a fourth consecutive term for
   Prime Minister Edi Rama, extending his reign as the longest-serving leader of

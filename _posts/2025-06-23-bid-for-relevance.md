@@ -4,6 +4,7 @@ title: 'A new face, an old dilemma'
 date: 2025-06-23T00:00:00.000Z
 category: Another start-up party
 author: Andraž Tavčar
+author_slug: andraz-tavcar
 author_image: /assets/images/authors/placeholder.svg
 image: /assets/images/messiah.jpg
 image_caption: Description of the image.

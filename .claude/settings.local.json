@@ -5,7 +5,8 @@
       "Bash(if not exist scripts mkdir scripts)",
       "Bash(npm install:*)",
       "Bash(npm run extract-colors:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(cat:*)"
     ]
   }
 }

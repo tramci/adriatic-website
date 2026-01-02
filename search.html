@@ -51,7 +51,7 @@ title: Search
           <a href="${post.url}">
             <h2 class="search-result-title">${post.title}</h2>
             <p class="search-result-excerpt">${post.excerpt}</p>
-            ${post.author ? `<span class="search-result-author">By ${post.author}</span>` : ''}
+            ${post.author ? `<span class="search-result-author">By <span class="search-result-author-name">${post.author}</span></span>` : ''}
           </a>
         </article>
       `).join('');

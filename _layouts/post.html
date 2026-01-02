@@ -44,7 +44,7 @@ layout: default
 <div class="post-byline-section">
   <div class="post-byline-inner">
     {% if page.author %}
-    <p class="post-byline">By {{ page.author }}</p>
+    <p class="post-byline">By <span class="post-byline-name">{{ page.author }}</span></p>
     {% endif %}
     <p class="post-date">{{ page.date | date: "%-d %B %Y" }}</p>
   </div>

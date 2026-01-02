@@ -1,0 +1,19 @@
+# Author profiles
+# Add new authors here with their bio
+
+andraz-tavcar:
+  name: "Andraž Tavčar"
+  bio: "Andraž Tavčar is the founding editor of Adriatic. He covers Slovenian politics and EU affairs."
+
+james-osullivan:
+  name: "James O'Sullivan"
+  bio: "James O'Sullivan lectures in the School of English and Digital Humanities at University College Cork, where his work explores the intersection of technology and culture."
+
+maja-dragovic:
+  name: "Maja Dragović"
+  bio: "Maja Dragović is a journalist covering Central and Eastern European politics."
+
+# Template for adding new authors:
+# author-slug:
+#   name: "Full Name"
+#   bio: "Short bio describing the author's background and expertise."
