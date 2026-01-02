@@ -1,64 +1,84 @@
 ---
 layout: default
 title: Search
+permalink: /search/
 ---
 
 <div class="search-page">
-  <h1 class="search-page-title">Search Results</h1>
-  <p class="search-page-query" id="search-query-display"></p>
+  <p class="search-hint-heading">Not sure where to start?</p>
+  <p class="search-hint">Search our archive, or browse by category: <a href="{{ site.baseurl }}/category/politics/">Politics</a>, <a href="{{ site.baseurl }}/category/business/">Business</a>, <a href="{{ site.baseurl }}/category/culture/">Culture</a>.</p>
 
-  <div class="search-results-list" id="search-results-list">
-    <p class="search-loading">Searching...</p>
+  <div class="search-input-wrapper">
+    <input type="text" class="search-input" id="search-input" placeholder="Search articles..." autocomplete="off" autofocus>
   </div>
+
+  <div class="search-results" id="search-results"></div>
 </div>
 
 <script>
 (function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get('q') || '';
-  const queryDisplay = document.getElementById('search-query-display');
-  const resultsList = document.getElementById('search-results-list');
-
-  if (!query.trim()) {
-    queryDisplay.textContent = '';
-    resultsList.innerHTML = '<p class="search-no-query">Enter a search term to find articles.</p>';
-    return;
-  }
-
-  queryDisplay.textContent = `Results for "${query}"`;
-
-  // Load search data and perform search
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
   const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
 
+  let searchData = null;
+  let debounceTimer = null;
+
+  // Load search data immediately
   fetch(`${baseUrl}/search.json`)
     .then(response => response.json())
-    .then(searchData => {
-      const lowerQuery = query.toLowerCase();
-      const results = searchData.filter(post => {
-        return post.title.toLowerCase().includes(lowerQuery) ||
-               post.excerpt.toLowerCase().includes(lowerQuery) ||
-               (post.author && post.author.toLowerCase().includes(lowerQuery)) ||
-               (post.category && post.category.toLowerCase().includes(lowerQuery));
-      });
-
-      if (results.length === 0) {
-        resultsList.innerHTML = '<p class="search-no-results">No results found.</p>';
-        return;
+    .then(data => {
+      searchData = data;
+      // Check for query param on load
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialQuery = urlParams.get('q') || '';
+      if (initialQuery) {
+        searchInput.value = initialQuery;
+        performSearch(initialQuery);
       }
-
-      resultsList.innerHTML = results.map(post => `
-        <article class="search-result-item">
-          <a href="${post.url}">
-            <h2 class="search-result-title">${post.title}</h2>
-            <p class="search-result-excerpt">${post.excerpt}</p>
-            ${post.author ? `<span class="search-result-author">By <span class="search-result-author-name">${post.author}</span></span>` : ''}
-          </a>
-        </article>
-      `).join('');
     })
     .catch(error => {
-      console.error('Search failed:', error);
-      resultsList.innerHTML = '<p class="search-error">Search failed. Please try again.</p>';
+      console.error('Failed to load search data:', error);
     });
+
+  function performSearch(query) {
+    if (!query.trim()) {
+      searchResults.innerHTML = '';
+      return;
+    }
+
+    if (!searchData) {
+      searchResults.innerHTML = '<p class="search-message">Loading...</p>';
+      return;
+    }
+
+    const lowerQuery = query.toLowerCase();
+    const results = searchData.filter(post => {
+      return post.title.toLowerCase().includes(lowerQuery) ||
+             post.excerpt.toLowerCase().includes(lowerQuery) ||
+             (post.author && post.author.toLowerCase().includes(lowerQuery)) ||
+             (post.category && post.category.toLowerCase().includes(lowerQuery));
+    });
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p class="search-message">No results found.</p>';
+      return;
+    }
+
+    searchResults.innerHTML = results.map(post => `
+      <a href="${post.url}" class="search-result">
+        <span class="search-result-title">${post.title}</span>
+        <span class="search-result-excerpt">${post.excerpt}</span>
+        ${post.author ? `<span class="search-result-meta">By ${post.author}</span>` : ''}
+      </a>
+    `).join('');
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      performSearch(e.target.value);
+    }, 150);
+  });
 })();
 </script>

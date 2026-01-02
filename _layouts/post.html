@@ -6,7 +6,7 @@ layout: default
 <div class="post-hero-section">
   <div class="post-header">
     <div class="post-category">
-      <span class="category-tag {{ page.category }}">{{ page.category }}</span>
+      <span class="category-tag {{ page.category }}">{% if page.category_display %}{{ page.category_display }}{% else %}{{ page.category }}{% endif %}</span>
     </div>
     <h1 class="post-title">{{ page.title }}</h1>
 
