@@ -5,11 +5,9 @@ date: 2025-06-04T00:00:00.000Z
 category: politics
 category_display: Trump rebuked
 author: Maja Dragović
-author_slug: maja-dragovic
-author_image: /assets/images/authors/placeholder.svg
-image: /assets/images/populist-moment-denied.png
-image_caption: Description of the image.
-image_credit: Photo by John Doe
+image: /assets/images/posts/populist-moment-denied/hero.png
+image_caption: Crowds gather in Bucharest's University Square waving EU flags as centrist candidate Nicușor Dan claims victory over nationalist rival George Simion.
+image_credit: Vlad Ionescu / Reuters
 excerpt: >-
   Nicușor Dan's surprise win over far-right firebrand George Simion in Romania's
   presidential runoff marks a high-turnout rejection of "Romania First" populism

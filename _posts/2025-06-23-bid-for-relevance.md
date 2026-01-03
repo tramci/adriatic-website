@@ -5,11 +5,9 @@ date: 2025-06-23T00:00:00.000Z
 category: politics
 category_display: Another start-up party
 author: Andraž Tavčar
-author_slug: andraz-tavcar
-author_image: /assets/images/authors/placeholder.svg
-image: /assets/images/messiah.jpg
-image_caption: Description of the image.
-image_credit: Photo by John Doe
+image: /assets/images/posts/bid-for-relevance/hero.jpg
+image_caption: Vladimir Prebilič announces his intention to launch a new political party at a press conference in Ljubljana, positioning himself as an alternative to Slovenia's fragmented centre-left.
+image_credit: Anže Petkovšek / Delo
 excerpt: >-
   In Slovenia's increasingly atomised political landscape, Vladimir Prebilič's
   decision to launch a new party ahead of the 2026 parliamentary elections may

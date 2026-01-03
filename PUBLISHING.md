@@ -55,13 +55,26 @@ featured: false
 
 ## Image Options
 
+### Image Organization
+
+Images are organized in slug-based subdirectories under `/assets/images/posts/`. Each article has its own folder matching the article slug, with the hero image named `hero.png` or `hero.jpg`:
+
+```
+assets/images/posts/
+├── your-article-slug/
+│   ├── hero.png          (or hero.jpg)
+│   └── other-image.jpg   (optional additional images)
+├── another-article/
+│   └── hero.jpg
+```
+
 ### Basic Image
 
 ```yaml
-image: /assets/images/posts/my-photo.jpg
+image: /assets/images/posts/your-article-slug/hero.png
 ```
 
-Place your images in `/assets/images/posts/` and reference them with the path above.
+Create a folder matching your article slug in `/assets/images/posts/` and place your hero image inside as `hero.png` or `hero.jpg`.
 
 ### Image Position (Focal Point)
 
@@ -128,7 +141,7 @@ date: 2025-12-24
 category: politics
 category_display: "Politics"
 excerpt: "In Slovenia's increasingly atomised political landscape, Vladimir Prebilic's decision to launch a new party ahead of the 2026 parliamentary elections may appear a bold personal gamble."
-image: /assets/images/posts/prebilic-press-conference.jpg
+image: /assets/images/posts/a-new-face-an-old-dilemma/hero.jpg
 image_position: center 40%
 image_fullbleed: false
 featured: true

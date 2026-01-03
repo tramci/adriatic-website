@@ -1,7 +1,7 @@
 title: "The Adriatic"
-description: "An open-source initiative for tracking global news, conflict, and intelligence"
-url: "https://tramci.github.io"
-baseurl: "/azt"
+description: "On geopolitics and living in the Adriatic region"
+url: ""
+baseurl: ""
 
 # Build settings
 markdown: kramdown
@@ -38,7 +38,7 @@ paginate: 10
 paginate_path: "/page:num/"
 
 # Categories
-categories: [business, power, culture, opinion]
+categories: [politics, business, culture]
 
 # Performance optimizations
 compress_html:
@@ -62,12 +62,6 @@ twitter:
   username: TheAdriatic
   card: summary_large_image
 
-# Default image for social sharing
-defaults:
-  - scope:
-      path: ""
-    values:
-      image: /azt/assets/images/default-share.jpg  # Add a default share image
 
 # Exclude from processing
 exclude:

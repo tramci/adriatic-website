@@ -8,6 +8,39 @@
   const body = document.body;
 
   // =================================================================
+  // MOBILE MENU - Hamburger toggle
+  // =================================================================
+
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+  if (mobileMenuToggle && mobileMenuOverlay) {
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileMenuOverlay.classList.add('is-open');
+      body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+    });
+  }
+
+  if (mobileMenuClose && mobileMenuOverlay) {
+    mobileMenuClose.addEventListener('click', function() {
+      mobileMenuOverlay.classList.remove('is-open');
+      body.style.overflow = ''; // Restore scrolling
+    });
+  }
+
+  // Close menu when clicking on a link
+  if (mobileMenuOverlay) {
+    const menuLinks = mobileMenuOverlay.querySelectorAll('a');
+    menuLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenuOverlay.classList.remove('is-open');
+        body.style.overflow = '';
+      });
+    });
+  }
+
+  // =================================================================
   // ABOVE-FOLD HEIGHT - Dynamic calculation based on masthead
   // =================================================================
 

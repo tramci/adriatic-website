@@ -5,12 +5,9 @@ date: 2025-06-22T00:00:00.000Z
 category: politics
 category_display: Crisis in Persia
 author: Andraž Tavčar
-author_slug: andraz-tavcar
-author_role: Researcher
-author_image: /assets/images/authors/placeholder.svg
-image: /assets/images/trump-situation.jpg
-image_caption: Description of the image.
-image_credit: Photo by John Doe
+image: /assets/images/posts/us-strikes-irans/hero.jpg
+image_caption: President Donald Trump addresses reporters in the White House Situation Room moments after announcing Operation Midnight Hammer, the largest B-2 bomber strike in US military history.
+image_credit: Doug Mills / The New York Times
 excerpt: >-
   The United States launched devastating airstrikes against three of Iran's most
   sensitive nuclear sites on Sunday, marking the most significant American

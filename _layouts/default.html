@@ -8,7 +8,12 @@
   <meta name="base-url" content="{{ site.baseurl }}" />
 
   <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+
+  <!-- SEO: Open Graph, Twitter Cards, canonical URL -->
+  {% seo %}
+
+  <!-- RSS Feed -->
+  {% feed_meta %}
 
   <!-- Critical CSS inline -->
   <style>
@@ -25,7 +30,7 @@
   <nav class="sticky-navbar" id="sticky-navbar">
     <div class="sticky-navbar-container">
       <a href="{{ site.baseurl }}/" class="sticky-navbar-logo" aria-label="The Adriatic">
-        <img src="{{ site.baseurl }}/assets/images/branding/the-adriatic-wordmark-white.svg" alt="The Adriatic" class="sticky-navbar-logo-img">
+        <img src="{{ site.baseurl }}/assets/images/branding/wordmark-white.svg" alt="The Adriatic" class="sticky-navbar-logo-img">
       </a>
       <div class="sticky-navbar-actions">
         <a href="{{ site.baseurl }}/newsletter/" class="sticky-navbar-newsletter">Newsletter</a>
@@ -106,9 +111,16 @@
 
   <!-- MASTHEAD (scrolls up behind nav) -->
   <header class="masthead">
+    <!-- Mobile hamburger menu button -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
     <div class="masthead-brand">
       <a href="{{ site.baseurl }}/" class="site-title" aria-label="The Adriatic">
-        <img src="{{ site.baseurl }}/assets/images/branding/THE ADRIATIC.svg" alt="The Adriatic" class="site-title-svg">
+        <img src="{{ site.baseurl }}/assets/images/branding/wordmark.svg" alt="The Adriatic" class="site-title-svg site-title-svg-dark">
+        <img src="{{ site.baseurl }}/assets/images/branding/wordmark-white.svg" alt="The Adriatic" class="site-title-svg site-title-svg-white">
       </a>
       <span class="masthead-blurb">on geopolitics & living</span>
     </div>
@@ -122,7 +134,40 @@
         </svg>
       </a>
     </div>
+    <!-- Mobile subscribe button -->
+    <a href="{{ site.baseurl }}/subscribe/" class="mobile-subscribe-btn">Subscribe</a>
   </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu-header">
+      <a href="{{ site.baseurl }}/" class="mobile-menu-logo">
+        <img src="{{ site.baseurl }}/assets/images/branding/wordmark-white.svg" alt="The Adriatic">
+      </a>
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="{{ site.baseurl }}/category/latest/" class="mobile-menu-link">Latest</a>
+      <a href="{{ site.baseurl }}/category/culture/" class="mobile-menu-link">Culture</a>
+      <a href="{{ site.baseurl }}/category/politics/" class="mobile-menu-link">Politics</a>
+      <a href="{{ site.baseurl }}/category/business/" class="mobile-menu-link">Business</a>
+      <a href="{{ site.baseurl }}/category/magazine/" class="mobile-menu-link">Magazine</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="{{ site.baseurl }}/search/" class="mobile-menu-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+        </svg>
+        Search
+      </a>
+      <a href="{{ site.baseurl }}/newsletter/" class="mobile-menu-newsletter">Newsletter</a>
+    </div>
+  </div>
 
 
 <!-- MAIN CONTENT -->
@@ -143,7 +188,7 @@
       <!-- Brand column -->
       <div class="footer-brand">
         <a href="{{ site.baseurl }}/" class="footer-wordmark" aria-label="{{ site.title }}">
-          <img src="{{ site.baseurl }}/assets/images/branding/THE ADRIATIC.svg" alt="The Adriatic" class="footer-logo-img">
+          <img src="{{ site.baseurl }}/assets/images/branding/wordmark.svg" alt="The Adriatic" class="footer-logo-img">
         </a>
         <p class="footer-publisher">Published by<br><a href="#">Inštitut za strateške rešitve (ISR)</a></p>
         <div class="footer-legal">

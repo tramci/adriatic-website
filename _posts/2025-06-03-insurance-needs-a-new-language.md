@@ -5,11 +5,9 @@ date: 2025-06-04T00:00:00.000Z
 category: business
 category_display: Infantilisation
 author: Andraž Tavčar
-author_slug: andraz-tavcar
-author_image: /assets/images/authors/placeholder.svg
-image: /assets/images/insurance-aint-all-that.png
-image_caption: Description of the image.
-image_credit: Photo by John Doe
+image: /assets/images/posts/insurance-needs-a-new-language/hero.png
+image_caption: Delegates attend the opening session of the Slovenian Insurance Association's annual conference in Ljubljana, where industry leaders warned against the "infantilisation" of financial communication.
+image_credit: Jaka Lopatič / STA
 excerpt: >-
   In a world that increasingly trades complexity for convenience, Slovenia's
   insurance leaders gathered last week to make a stark case: maturity still
