@@ -9,9 +9,11 @@ layout: default
 {% assign category_description = page.category_description %}
 
 {% if category_slug == "latest" %}
-  {% assign all_posts = site.posts %}
+  {% assign all_posts = site.posts | slice: 0, 5 %}
+  {% assign is_latest = true %}
 {% else %}
   {% assign all_posts = site.posts | where: "category", category_slug %}
+  {% assign is_latest = false %}
 {% endif %}
 
 {% assign total_posts = all_posts.size %}
@@ -51,7 +53,7 @@ layout: default
       {% endif %}
     </div>
 
-    {% if total_pages > 1 %}
+    {% if total_pages > 1 and is_latest != true %}
     <nav class="category-pagination">
       <div class="pagination-nav">
         {% if current_page > 1 %}
