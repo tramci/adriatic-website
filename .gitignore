@@ -10,6 +10,9 @@ _site/
 Gemfile.lock
 vendor/
 
+# Node
+node_modules/
+
 # OS files
 .DS_Store
 Thumbs.db

@@ -18,7 +18,8 @@
       "Bash(bundle install:*)",
       "Bash(curl:*)",
       "Bash(# Calculate actual sticky navbar height\n# padding: 0.75rem \\(12px\\) top + 0.75rem \\(12px\\) bottom = 24px padding\n# logo height: 24px\n# Total should be about 48px, but there might be a border or extra spacing)",
-      "Bash(xargs kill -9)"
+      "Bash(xargs kill -9)",
+      "Bash(git -C /Users/azt/Documents/GitHub/adriatic-website log --oneline -10)"
     ]
   }
 }
